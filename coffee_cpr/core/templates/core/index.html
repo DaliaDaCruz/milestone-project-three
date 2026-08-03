@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Coffee CPR | Giving coffee machines a second shot!{% endblock %}
+
+{% block content %}
+<div class="hero-section d-flex align-items-center justify-content-center text-center text-white py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-lg-8 position-relative">
+                
+                <!-- ☕ Circular Image (Positioned behind text) -->
+                <img src="{% static 'core/img/circular_img.jpg' %}" alt="" class="circle-bg-accent">
+
+                <!-- Text Layer (Positioned on top) -->
+                <div class="hero-content py-4">
+<h1 class="display-3 fw-bold mb-3">☕ Coffee CPR</h1>
+                <p class="lead mb-4 fs-4">We provide professional repairs to your coffee machine! From changing a valve to a full service repair, we have you covered.
+                    Our team of experts is dedicated to ensuring your coffee machine is in top condition, so your clients can enjoy the perfect cup every time.
+In addition, we offer a wide range of coffee machines for sale. 
+Browse our selection and find the perfect coffee machine to suit your needs. Explore our catalogue today and elevate your coffee experience!
+
+                </p>
+                <a href="{% url 'catalog' %}" class="btn btn-primary btn-lg px-4 me-2">Explore Catalog</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

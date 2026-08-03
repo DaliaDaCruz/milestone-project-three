@@ -1,0 +1,159 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard | Coffee CPR{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Top Header -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+        <div>
+            <h1 class="fw-bold mb-1">My Dashboard</h1>
+            <p class="text-muted mb-0">Welcome back, {{ user.get_full_name|default:user.username }}!</p>
+        </div>
+        <a href="{% url 'booking' %}" class="btn btn-dark fw-semibold">+ New Repair Request</a>
+    </div>
+
+    <!-- User Profile Summary Card -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm border-0 p-3 bg-light">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                    <div>
+                        <span class="me-3"><strong>Username:</strong> {{ user.username }}</span>
+                        <span class="me-3"><strong>Email:</strong> {{ user.email|default:"Not provided" }}</span>
+                        <span><strong>Member Since:</strong> {{ user.date_joined|date:"M Y" }}</span>
+                    </div>
+                    <div>
+                        <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Bookings Table -->
+    <div class="card shadow-sm border-0 mb-5">
+        <div class="card-header bg-dark text-white py-3">
+            <h5 class="card-title mb-0 fw-bold">My Repair Requests</h5>
+        </div>
+        <div class="card-body p-0">
+            {% if bookings %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0" style="min-width: 650px;">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width: 10%;">#</th>
+                                <th style="width: 25%;">Service</th>
+                                <th style="width: 30%;">Contact Email</th>
+                                <th style="width: 20%;">Submitted On</th>
+                                <th style="width: 15%;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for booking in bookings %}
+                                <tr>
+                                    <td><strong>#{{ booking.id }}</strong></td>
+                                    <td>
+                                        {% if booking.service == 'routine' %}
+                                            <span class="badge bg-info text-dark">Routine Maintenance</span>
+                                        {% elif booking.service == 'repair' %}
+                                            <span class="badge bg-danger">Emergency Repair</span>
+                                        {% elif booking.service == 'descale' %}
+                                            <span class="badge bg-warning text-dark">Descaling & Filtration</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">{{ booking.service }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ booking.email }}</td>
+                                    <td>{{ booking.created_at|date:"M d, Y - H:i" }}</td>
+                                    <td><span class="badge bg-success">Received</span></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="text-center py-5">
+                    <p class="text-muted mb-3">You haven't submitted any service booking requests yet.</p>
+                    <a href="{% url 'booking' %}" class="btn btn-outline-dark">Book Your First Service</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- User Orders Table -->
+    <div class="card shadow-sm border-0 mb-5">
+        <div class="card-header bg-dark text-white py-3">
+            <h5 class="card-title mb-0 fw-bold">Order History</h5>
+        </div>
+        <div class="card-body p-0">
+            {% if orders %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0" style="min-width: 650px;">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width: 20%;">Order #</th>
+                                <th style="width: 35%;">Items</th>
+                                <th style="width: 20%;">Placed On</th>
+                                <th style="width: 15%;">Total</th>
+                                <th style="width: 10%;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td><strong>#{{ order.order_number }}</strong></td>
+                                    <td>
+                                        <ul class="list-unstyled mb-0 small">
+                                            {% for item in order.items.all %}
+                                                <li>{{ item.quantity }}x {{ item.machine.name }}</li>
+                                            {% empty %}
+                                                <span class="text-muted">Order details</span>
+                                            {% endfor %}
+                                        </ul>
+                                    </td>
+                                    <td>{{ order.created_at|date:"M d, Y" }}</td>
+                                    <td class="fw-bold">${{ order.total_price }}</td>
+                                    <td><span class="badge bg-primary">Completed</span></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="text-center py-5">
+                    <p class="text-muted mb-3">You haven't placed any orders yet.</p>
+                    <a href="{% url 'catalog' %}" class="btn btn-outline-dark">Explore Our Catalog</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Explore Coffee Machines Section -->
+    {% if featured_machines %}
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="fw-bold mb-0">Explore Coffee Machines</h4>
+            <a href="{% url 'catalog' %}" class="text-decoration-none fw-semibold text-dark">View Full Catalog &rarr;</a>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for machine in featured_machines %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <h5 class="card-title fw-bold">{{ machine.name }}</h5>
+                                <p class="card-text text-muted small">{{ machine.description|truncatewords:15 }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+                                <span class="fw-bold fs-5">${{ machine.price }}</span>
+                                <a href="{% url 'machine_detail' machine.slug %}" class="btn btn-sm btn-outline-dark">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

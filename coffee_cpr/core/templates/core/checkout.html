@@ -1,0 +1,148 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Checkout | Coffee CPR{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="fw-bold mb-4">Checkout</h1>
+
+    {% if cart_items %}
+    <form method="POST" action="{% url 'checkout' %}">
+        {% csrf_token %}
+        <div class="row g-4">
+            <!-- Left Column: Shipping & Payment Form -->
+            <div class="col-lg-7">
+                <!-- Customer Information -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-dark text-white fw-bold">
+                        1. Contact Information
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="full_name" class="form-label fw-semibold">Full Name</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="full_name" 
+                                   name="full_name" 
+                                   value="{% if user.is_authenticated %}{{ user.get_full_name|default:user.username }}{% endif %}" 
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-semibold">Email Address</label>
+                            <input type="email" 
+                                   class="form-control" 
+                                   id="email" 
+                                   name="email" 
+                                   value="{% if user.is_authenticated %}{{ user.email }}{% endif %}" 
+                                   required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Address -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-dark text-white fw-bold">
+                        2. Shipping Address
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="address" class="form-label fw-semibold">Street Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="123 Coffee St" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="city" class="form-label fw-semibold">City</label>
+                                <input type="text" class="form-control" id="city" name="city" placeholder="London" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="postcode" class="form-label fw-semibold">Postcode</label>
+                                <input type="text" class="form-control" id="postcode" name="postcode" placeholder="EC1A 1BB" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Info (Demo Mode) -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-dark text-white fw-bold">
+                        3. Payment Method (Demo Mode)
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted small mb-3">This is a demo checkout. You can enter mock card details below to test order processing.</p>
+                        <div class="mb-3">
+                            <label for="card_number" class="form-label fw-semibold">Card Number</label>
+                            <input type="text" class="form-control" id="card_number" placeholder="4242 •••• •••• 4242" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="exp_date" class="form-label fw-semibold">Expiry Date</label>
+                                <input type="text" class="form-control" id="exp_date" placeholder="MM/YY" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cvv" class="form-label fw-semibold">CVV</label>
+                                <input type="text" class="form-control" id="cvv" placeholder="123" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Order Summary & Proceed Button -->
+            <div class="col-lg-5">
+                <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
+                    <div class="card-header bg-dark text-white fw-bold">
+                        Order Summary
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush mb-3">
+                            {% for item in cart_items %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <div>
+                                    <h6 class="my-0 fw-semibold">{{ item.name }}</h6>
+                                    <small class="text-muted">Qty: {{ item.quantity }} x ${{ item.price }}</small>
+                                </div>
+                                <span class="fw-bold">${{ item.subtotal }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="border-top pt-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Subtotal</span>
+                                <span>${{ total_price }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Shipping</span>
+                                <span>Free</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3 fs-5 fw-bold border-top pt-2">
+                                <span>Total</span>
+                                <span>${{ total_price }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Place Order Submit Button -->
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-dark btn-lg fw-bold">
+                                Complete Order &rarr;
+                            </button>
+                            <a href="{% url 'catalog' %}" class="btn btn-outline-secondary btn-sm">
+                                Continue Shopping
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% else %}
+    <!-- Empty Basket State -->
+    <div class="text-center py-5">
+        <h3 class="fw-bold mb-3">Your Basket is Empty</h3>
+        <p class="text-muted mb-4">Add some coffee machines or products to your basket before checking out.</p>
+        <a href="{% url 'catalog' %}" class="btn btn-dark btn-lg fw-semibold">Browse Catalog</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

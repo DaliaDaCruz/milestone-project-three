@@ -1,0 +1,64 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Book a Service | Coffee CPR{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm border-0 p-4">
+                <div class="card-body">
+                    <h2 class="card-title text-center fw-bold mb-4">Book a Repair Service</h2>
+
+                    <form method="POST" action="{% url 'booking' %}">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="name" class="form-label fw-semibold">Full Name</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="name" 
+                                   name="name" 
+                                   value="{% if user.is_authenticated %}{{ user.get_full_name|default:user.username }}{% endif %}" 
+                                   placeholder="e.g. Jane Doe" 
+                                   required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-semibold">Email Address</label>
+                            <input type="email" 
+                                   class="form-control" 
+                                   id="email" 
+                                   name="email" 
+                                   value="{% if user.is_authenticated %}{{ user.email }}{% endif %}" 
+                                   placeholder="jane@example.com" 
+                                   required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="service" class="form-label fw-semibold">Select Repair Service</label>
+                            <select class="form-select" id="service" name="service" required>
+                                <option value="" {% if not selected_service %}selected{% endif %} disabled>Choose a service...</option>
+                                <option value="routine" {% if selected_service == 'routine' %}selected{% endif %}>
+                                    Routine Maintenance
+                                </option>
+                                <option value="repair" {% if selected_service == 'repair' %}selected{% endif %}>
+                                    Emergency Repairs
+                                </option>
+                                <option value="descale" {% if selected_service == 'descale' %}selected{% endif %}>
+                                    Descaling & Water Filtration
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-dark btn-lg fw-semibold">Confirm Booking Request ☕</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
