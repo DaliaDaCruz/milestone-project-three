@@ -1,1 +1,1 @@
-web: gunicorn coffee_cpr.wsgi
+web: gunicorn --chdir coffee_cpr coffee_cpr.wsgi:application
