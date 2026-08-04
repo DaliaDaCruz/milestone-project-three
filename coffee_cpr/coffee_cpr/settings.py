@@ -20,9 +20,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dh-hvpt%q9k^1g&j$9ij=
 DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = [
-    'coffee-cpr-d6756e17eee2.herokuapp.com', 'localhost', '127.0.0.1'] 
-    'coffee-cpr.herokuapp.com', 
-    'localhost', 
+    'coffee-cpr-d6756e17eee2.herokuapp.com',
+    'coffee-cpr.herokuapp.com',
+    'localhost',
     '127.0.0.1',
 ]
 
