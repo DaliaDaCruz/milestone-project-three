@@ -10,8 +10,6 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-sys.path.insert(0, str(BASE_DIR))
-sys.path.insert(0, str(BASE_DIR.parent))
 
 # Load environment variables if env.py exists (local dev)
 if os.path.isfile(BASE_DIR / 'env.py'):
