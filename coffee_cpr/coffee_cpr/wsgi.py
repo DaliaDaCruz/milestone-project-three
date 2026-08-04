@@ -10,4 +10,3 @@ sys.path.append(str(BASE_DIR))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'coffee_cpr.settings')
 
 application = get_wsgi_application()
-Step 3: Force Comm
