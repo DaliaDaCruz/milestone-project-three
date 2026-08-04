@@ -16,13 +16,14 @@ if os.path.isfile(BASE_DIR / 'env.py'):
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dh-hvpt%q9k^1g&j$9ij=s0v(diu4epd0p&y8)t#lc@%wq7k$f')
 
-DEBUG = 'DEVELOPMENT' in os.environ
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'coffee-cpr-d6756e17eee2.herokuapp.com',
     'coffee-cpr.herokuapp.com',
     'localhost',
     '127.0.0.1',
+    '.herokuapp.com',
 ]
 
 # Application definition
