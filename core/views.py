@@ -163,3 +163,10 @@ def order_success(request, order_number):
 
 
     return render(request, 'core/order_success.html', {'order_number': order_number})
+
+def checkout_success(request):
+    return render(request, 'core/checkout_success.html')
+
+def checkout_cancel(request):
+    return render(request, 'core/checkout_cancel.html')
+
