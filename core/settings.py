@@ -20,7 +20,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'coffee-cpr-d6756e17eee2.herokuapp.com',
-    'coffee-cpr.herokuapp.com',
+    '.herokuapp.com',
     'localhost',
     '127.0.0.1',
 ]
