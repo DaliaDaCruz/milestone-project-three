@@ -106,8 +106,8 @@
         <ul class="navbar-nav ms-auto align-items-lg-center">
           <li class="nav-item"><a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home me-1"></i> Home</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'catalog' %}"><i class="fas fa-coffee me-1"></i> Catalog</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-tools me-1"></i> Services</a></li>
-          <li class="nav-item me-lg-2"><a class="nav-link" href="#"><i class="fas fa-shopping-basket me-1"></i> Basket</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'services' %}"><i class="fas fa-tools me-1"></i> Services</a></li>
+          <li class="nav-item me-lg-2"><a class="nav-link" href="{% url 'cart' %}"><i class="fas fa-shopping-basket me-1"></i> Basket</a></li>
           
           {% if user.is_authenticated %}
             <li class="nav-item"><a class="nav-link fw-semibold" href="{% url 'dashboard' %}"><i class="fas fa-user-circle me-1"></i> Dashboard</a></li>
