@@ -127,7 +127,7 @@ def add_to_cart(request, machine_id):
 
     request.session['cart'] = cart_session
     messages.success(request, f'Added {machine.name} to your cart.')
-    return redirect('cart')
+    return redirect('catalog')
 
 
 @require_POST
@@ -140,7 +140,7 @@ def remove_from_cart(request, machine_id):
         request.session['cart'] = cart_session
         messages.success(request, 'Item removed from cart.')
 
-    return redirect('cart')
+    return redirect('catalog')
 
 
 @login_required
