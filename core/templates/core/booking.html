@@ -40,13 +40,13 @@
                             <label for="service" class="form-label fw-semibold">Select Repair Service</label>
                             <select class="form-select" id="service" name="service" required>
                                 <option value="" {% if not selected_service %}selected{% endif %} disabled>Choose a service...</option>
-                                <option value="routine" {% if selected_service == 'routine' %}selected{% endif %}>
+                                <option value="routine" {% if selected_service == 'routine' or selected_service == 'Routine Maintenance' %}selected{% endif %}>
                                     Routine Maintenance
                                 </option>
-                                <option value="repair" {% if selected_service == 'repair' %}selected{% endif %}>
+                                <option value="repair" {% if selected_service == 'repair' or selected_service == 'Emergency Repairs' %}selected{% endif %}>
                                     Emergency Repairs
                                 </option>
-                                <option value="descale" {% if selected_service == 'descale' %}selected{% endif %}>
+                                <option value="descale" {% if selected_service == 'descale' or selected_service == 'Descaling & Water Filtration' %}selected{% endif %}>
                                     Descaling & Water Filtration
                                 </option>
                             </select>
@@ -54,7 +54,7 @@
 
                         <div class="d-grid mt-4">
                             <button type="submit" class="btn btn-dark btn-lg fw-semibold">
-                                Confirm Booking Request <span role="img" aria-label="Coffee Cup">☕</span>
+                                Confirm Booking Request ☕
                             </button>
                         </div>
                     </form>

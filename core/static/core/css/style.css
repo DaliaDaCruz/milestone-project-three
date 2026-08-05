@@ -1,0 +1,58 @@
+/* ==========================================================================
+   Coffee CPR - Main Stylesheet
+   ========================================================================== */
+
+/* Navigation & Footer Styling */
+.bg-coffee,
+.navbar-coffee,
+.footer-coffee {
+    background-color: #2b1e16 !important; /* Rich coffee bean brown */
+}
+
+.navbar-coffee .navbar-brand,
+.navbar-coffee .nav-link {
+    color: #f8f9fa !important;
+}
+
+.navbar-coffee .nav-link:hover {
+    color: #e6ccb2 !important; /* Warm cream hover accent */
+}
+
+/* Hero Section & Backgrounds */
+.hero-section {
+    /* Absolute path ensures Django resolves static image properly */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("/static/core/img/hero_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 80vh;
+    position: relative;
+}
+
+/* Circular Image Accent */
+.circle-bg-accent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px !important;
+    height: 480px !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    opacity: 0.55 !important;
+    z-index: 0;
+    pointer-events: none;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Content Layering */
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Product & Machine Cards */
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+}

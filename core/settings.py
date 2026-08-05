@@ -16,10 +16,10 @@ if os.path.isfile(BASE_DIR / 'env.py'):
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-fallback-dev-key')
 
-DEBUG = True
+# Set DEBUG to True only if explicitly set in environment (e.g. env.py)
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
-    '*',
     'coffee-cpr-d6756e17eee2.herokuapp.com',
     '.herokuapp.com',
     'localhost',
@@ -51,7 +51,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "core.urls"
-WSGI_APPLICATION = "core.wsgi.application"  # Keep this one only!
+WSGI_APPLICATION = "core.wsgi.application"
 
 TEMPLATES = [
     {
@@ -85,6 +85,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -101,9 +102,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# AppDirectoriesFinder automatically finds core/static/ core files
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -124,4 +124,5 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

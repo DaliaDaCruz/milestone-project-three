@@ -15,42 +15,42 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <!-- Service 1: Routine Maintenance -->
         <div class="col">
-            <div class="card h-100 shadow-sm border-0 text-center p-4">
+            <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
                 <div class="card-body d-flex flex-column">
                     <div class="fs-1 text-dark mb-3">
-                        <span role="img" aria-label="Maintenance Tools">🛠️</span>
+                        <i class="fas fa-tools"></i>
                     </div>
                     <h4 class="card-title fw-bold">Routine Maintenance</h4>
                     <p class="card-text text-muted flex-grow-1">Preventative group head servicing, seal replacements, and pressure calibrations to prevent costly downtime.</p>
-                    <a href="{% url 'booking' %}?service=routine" class="btn btn-outline-dark mt-3">Book Service</a>
+                    <a href="{% url 'booking' %}?service=routine" class="btn btn-outline-dark mt-3 fw-semibold">Book Service</a>
                 </div>
             </div>
         </div>
 
         <!-- Service 2: Emergency Repairs -->
         <div class="col">
-            <div class="card h-100 shadow-sm border-0 text-center p-4">
+            <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
                 <div class="card-body d-flex flex-column">
                     <div class="fs-1 text-dark mb-3">
-                        <span role="img" aria-label="Emergency Lightning">⚡</span>
+                        <i class="fas fa-bolt"></i>
                     </div>
                     <h4 class="card-title fw-bold">Emergency Repairs</h4>
                     <p class="card-text text-muted flex-grow-1">Rapid response for boiler failures, electrical faults, and severe leaks to get your machine back online quickly.</p>
-                    <a href="{% url 'booking' %}?service=repair" class="btn btn-dark mt-3">Book Emergency Repair</a>
+                    <a href="{% url 'booking' %}?service=repair" class="btn btn-dark mt-3 fw-semibold">Book Emergency Repair</a>
                 </div>
             </div>
         </div>
 
         <!-- Service 3: Descaling -->
         <div class="col">
-            <div class="card h-100 shadow-sm border-0 text-center p-4">
+            <div class="card h-100 shadow-sm border-0 text-center p-4 rounded-4">
                 <div class="card-body d-flex flex-column">
                     <div class="fs-1 text-dark mb-3">
-                        <span role="img" aria-label="Water Drop">💧</span>
+                        <i class="fas fa-tint"></i>
                     </div>
                     <h4 class="card-title fw-bold">Descaling & Water Filtration</h4>
                     <p class="card-text text-muted flex-grow-1">Complete system descaling and water filter installations to protect machine internals from scale build-up.</p>
-                    <a href="{% url 'booking' %}?service=descale" class="btn btn-outline-dark mt-3">Book Service</a>
+                    <a href="{% url 'booking' %}?service=descale" class="btn btn-outline-dark mt-3 fw-semibold">Book Service</a>
                 </div>
             </div>
         </div>

@@ -42,3 +42,4 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
     list_display = ('order', 'machine', 'price', 'quantity')
+    readonly_fields = ('price',)

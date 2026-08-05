@@ -17,7 +17,7 @@
                 <!-- Text Layer -->
                 <div class="hero-content py-4">
                     <h1 class="display-3 fw-bold mb-3">
-                        <span role="img" aria-label="Coffee Cup">☕</span> Coffee CPR
+                        ☕ Coffee CPR
                     </h1>
                     <p class="lead mb-4 fs-4">
                         We provide professional repairs for commercial and domestic coffee machines. 
@@ -32,7 +32,8 @@
                         <a href="{% url 'catalog' %}" class="btn btn-dark btn-lg px-4 fw-semibold">
                             Explore Catalog
                         </a>
-                        <a href="{% url 'services' %}" class="btn btn-outline-light btn-lg px-4 fw-semibold">
+                        <!-- FIXED: Changed 'services' to 'booking' to match urls.py -->
+                        <a href="{% url 'booking' %}" class="btn btn-outline-light btn-lg px-4 fw-semibold">
                             Book Servicing
                         </a>
                     </div>

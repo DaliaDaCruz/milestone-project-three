@@ -88,7 +88,7 @@
                 </div>
             </div>
 
-            <!-- Right Column: Order Summary & Proceed Button -->
+            <!-- Right Column: Order Summary -->
             <div class="col-lg-5">
                 <div class="card shadow-sm border-0 sticky-top rounded-3" style="top: 20px;">
                     <div class="card-header bg-dark text-white fw-bold py-3">
@@ -99,10 +99,10 @@
                             {% for item in cart_items %}
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                                 <div>
-                                    <h6 class="my-0 fw-semibold">{{ item.name }}</h6>
-                                    <small class="text-muted">Qty: {{ item.quantity }} x £{{ item.price }}</small>
+                                    <h6 class="my-0 fw-semibold">{{ item.name|default:item.machine.name }}</h6>
+                                    <small class="text-muted">Qty: {{ item.quantity }} x £{{ item.price|default:item.machine.price }}</small>
                                 </div>
-                                <span class="fw-bold">£{{ item.subtotal }}</span>
+                                <span class="fw-bold">£{{ item.subtotal|default:item.item_total }}</span>
                             </li>
                             {% endfor %}
                         </ul>
@@ -110,7 +110,7 @@
                         <div class="border-top pt-3">
                             <div class="d-flex justify-content-between mb-2">
                                 <span class="text-muted">Subtotal</span>
-                                <span>£{{ total_price }}</span>
+                                <span>£{{ total_price|default:subtotal }}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span class="text-muted">Shipping</span>
@@ -118,7 +118,7 @@
                             </div>
                             <div class="d-flex justify-content-between mb-3 fs-5 fw-bold border-top pt-2">
                                 <span>Total</span>
-                                <span>£{{ total_price }}</span>
+                                <span>£{{ total_price|default:total }}</span>
                             </div>
                         </div>
 
@@ -127,8 +127,8 @@
                             <button type="submit" class="btn btn-dark btn-lg fw-bold">
                                 Complete Order &rarr;
                             </button>
-                            <a href="{% url 'catalog' %}" class="btn btn-outline-secondary btn-sm">
-                                Continue Shopping
+                            <a href="{% url 'cart' %}" class="btn btn-outline-secondary btn-sm">
+                                Back to Basket
                             </a>
                         </div>
                     </div>
@@ -138,10 +138,12 @@
     </form>
     {% else %}
     <!-- Empty Basket State -->
-    <div class="text-center py-5">
+    <div class="text-center py-5 card border-0 shadow-sm rounded-4 p-5">
         <h3 class="fw-bold mb-3">Your Basket is Empty</h3>
         <p class="text-muted mb-4">Add some coffee machines or products to your basket before checking out.</p>
-        <a href="{% url 'catalog' %}" class="btn btn-dark btn-lg fw-semibold">Browse Catalog</a>
+        <div>
+            <a href="{% url 'catalog' %}" class="btn btn-dark btn-lg fw-semibold">Browse Catalog</a>
+        </div>
     </div>
     {% endif %}
 </div>

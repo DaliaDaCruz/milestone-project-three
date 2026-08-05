@@ -12,29 +12,113 @@
   <!-- FontAwesome Icons CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Your Custom CSS -->
-  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+
+  <style>
+    /* Warm Coffee / Espresso Palette */
+    :root {
+      --espresso-dark: #3c2415;
+      --coffee-brown: #5c3a21;
+      --roasted-accent: #7f5539;
+      --cream-light: #e6ccb2;
+      --cream-bg: #f8f5f0;
+    }
+
+    body {
+      background-color: var(--cream-bg);
+      color: #2b2b2b;
+    }
+
+    /* Navbar Styling */
+    .navbar-coffee {
+      background-color: var(--espresso-dark) !important;
+      border-bottom: 3px solid var(--cream-light);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    .navbar-coffee .navbar-brand {
+      color: #ffffff !important;
+      font-size: 1.4rem;
+      letter-spacing: 0.5px;
+    }
+
+    .navbar-coffee .nav-link {
+      color: var(--cream-light) !important;
+      font-weight: 500;
+      padding: 0.5rem 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .navbar-coffee .nav-link:hover,
+    .navbar-coffee .nav-link.active {
+      color: #ffffff !important;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+
+    /* Footer Styling */
+    .footer-coffee {
+      background-color: var(--espresso-dark) !important;
+      color: #ffffff !important;
+      border-top: 3px solid var(--coffee-brown);
+    }
+
+    .footer-coffee h5 {
+      color: #ffffff !important;
+      font-weight: 600;
+    }
+
+    .footer-coffee a {
+      color: var(--cream-light) !important;
+      transition: color 0.2s ease;
+    }
+
+    .footer-coffee a:hover {
+      color: #ffffff !important;
+      text-decoration: underline !important;
+    }
+
+    .social-icon-btn {
+      color: var(--cream-light) !important;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .social-icon-btn:hover {
+      color: #ffffff !important;
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
   <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-coffee sticky-top">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="{% url 'index' %}">Coffee CPR</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="{% url 'index' %}">
+        <i class="fas fa-mug-hot me-2 text-warning"></i>
+        <span>Coffee CPR</span>
+      </a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'catalog' %}">Catalog</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'cart' %}">Basket</a></li>
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home me-1"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'catalog' %}"><i class="fas fa-coffee me-1"></i> Catalog</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'services' %}"><i class="fas fa-tools me-1"></i> Services</a></li>
+          <li class="nav-item me-lg-2"><a class="nav-link" href="{% url 'cart' %}"><i class="fas fa-shopping-basket me-1"></i> Basket</a></li>
+          
           {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'user_logout' %}">Logout</a></li>
+            <li class="nav-item"><a class="nav-link fw-semibold" href="{% url 'dashboard' %}"><i class="fas fa-user-circle me-1"></i> Dashboard</a></li>
+            <li class="nav-item ms-lg-2">
+              <a class="btn btn-sm btn-outline-light px-3" href="{% url 'user_logout' %}">Logout</a>
+            </li>
           {% else %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'user_login' %}">Login</a></li>
+            <li class="nav-item ms-lg-2">
+              <a class="btn btn-sm btn-light text-dark fw-bold px-3" href="{% url 'register' %}">Register</a>
+            </li>
           {% endif %}
         </ul>
       </div>
@@ -45,7 +129,7 @@
   {% if messages %}
     <div class="container mt-3">
       {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm" role="alert">
           {{ message }}
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -54,52 +138,55 @@
   {% endif %}
 
   <!-- Main Content Block -->
-  <main class="flex-grow-1">
+  <main class="flex-grow-1 py-4">
     {% block content %}
     {% endblock %}
   </main>
 
   <!-- Footer -->
-  <footer style="background-color: #212529 !important; color: #ffffff !important;" class="py-4 mt-5">
+  <footer class="footer-coffee py-5 mt-auto">
     <div class="container">
       <div class="row gy-4">
         
         <!-- Business Info & Description -->
         <div class="col-md-4">
-          <h5 style="color: #ffffff !important;">Coffee CPR</h5>
-          <p class="small" style="color: #d1d5db !important;">Bringing your coffee machines back to life with expert service and quality parts.</p>
+          <h5 class="mb-3 d-flex align-items-center">
+            <i class="fas fa-mug-hot me-2 text-warning"></i> Coffee CPR
+          </h5>
+          <p class="small text-white-50">Bringing your coffee machines back to life with expert service, precision repairs, and high-quality replacement parts.</p>
         </div>
 
         <!-- Direct Contact Details -->
         <div class="col-md-4">
-          <h5 style="color: #ffffff !important;">Contact Us</h5>
+          <h5 class="mb-3">Contact Us</h5>
           <ul class="list-unstyled small">
             <li class="mb-2">
-              <i class="fas fa-envelope me-2" style="color: #ffffff !important;"></i>
-              <a href="mailto:support@coffeecpr.com" class="text-decoration-none" style="color: #ffffff !important;">support@coffeecpr.com</a>
+              <i class="fas fa-envelope me-2 text-warning"></i>
+              <a href="mailto:support@coffeecpr.com" class="text-decoration-none">support@coffeecpr.com</a>
             </li>
             <li class="mb-2">
-              <i class="fas fa-phone me-2" style="color: #ffffff !important;"></i>
-              <a href="tel:+1234567890" class="text-decoration-none" style="color: #ffffff !important;">+1 (234) 567-890</a>
+              <i class="fas fa-phone me-2 text-warning"></i>
+              <a href="tel:07706488192" class="text-decoration-none">+1 (234) 567-890</a>
             </li>
             <li class="mb-2">
-              <i class="fas fa-map-marker-alt me-2" style="color: #ffffff !important;"></i>
-              <span style="color: #ffffff !important;">123 Coffee Lane, Brewtown</span>
+              <i class="fas fa-map-marker-alt me-2 text-warning"></i>
+              <span>156 Coffee Lane, Brewtown</span>
             </li>
           </ul>
         </div>
 
         <!-- Social Media Channels -->
         <div class="col-md-4">
-          <h5 style="color: #ffffff !important;">Follow Us</h5>
-          <div class="d-flex gap-3 fs-4 mt-2">
-            <a href="https://facebook.com/yourbusiness" target="_blank" rel="noopener" aria-label="Facebook" style="color: #ffffff !important;">
+          <h5 class="mb-3">Follow Us</h5>
+          <p class="small text-white-50 mb-2">Connect with us on social media for machine maintenance tips & updates.</p>
+          <div class="d-flex gap-3 fs-4">
+            <a href="https://facebook.com/yourbusiness" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon-btn">
               <i class="fab fa-facebook"></i>
             </a>
-            <a href="https://instagram.com/yourbusiness" target="_blank" rel="noopener" aria-label="Instagram" style="color: #ffffff !important;">
+            <a href="https://instagram.com/yourbusiness" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon-btn">
               <i class="fab fa-instagram"></i>
             </a>
-            <a href="https://tiktok.com/@yourbusiness" target="_blank" rel="noopener" aria-label="TikTok" style="color: #ffffff !important;">
+            <a href="https://tiktok.com/@yourbusiness" target="_blank" rel="noopener" aria-label="TikTok" class="social-icon-btn">
               <i class="fab fa-tiktok"></i>
             </a>
           </div>
@@ -107,9 +194,9 @@
 
       </div>
 
-      <hr class="my-3" style="border-color: #495057 !important;">
+      <hr class="my-4 border-secondary">
       
-      <div class="text-center small" style="color: #a0aec0 !important;">
+      <div class="text-center small text-white-50">
         &copy; {% now "Y" %} Coffee CPR. All rights reserved.
       </div>
     </div>

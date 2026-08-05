@@ -25,23 +25,33 @@ class Machine(models.Model):
 
 
 class Booking(models.Model):
+    SERVICE_CHOICES = [
+        ('routine', 'Routine Maintenance'),
+        ('repair', 'Emergency Repair'),
+        ('descale', 'Descaling & Water Filtration'),
+    ]
+
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True
     )
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    service = models.CharField(max_length=100, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    service = models.CharField(max_length=100, choices=SERVICE_CHOICES, blank=True, null=True)
+    preferred_date = models.DateField(blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)  # FIXED: auto_now_add
 
     def __str__(self):
-        return f"Booking for {self.name} - {self.service}"
+        return f"Booking for {self.name} - {self.service or 'General'}"
 
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
     category = models.CharField(max_length=100, blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField(blank=True, null=True)
     badge = models.CharField(max_length=50, blank=True, null=True)
+    image_url = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -63,6 +73,12 @@ class Order(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        """Auto-generate a 10-character uppercase random order number if not set."""
+        if not self.order_number:
+            self.order_number = uuid.uuid4().hex[:10].upper()
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"Order #{self.order_number} by {self.full_name}"
 
@@ -80,4 +96,3 @@ class OrderItem(models.Model):
             f"{self.quantity} x {self.machine.name} "
             f"(Order #{self.order.order_number})"
         )
-    
