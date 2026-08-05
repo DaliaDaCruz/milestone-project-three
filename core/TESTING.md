@@ -45,4 +45,5 @@ Before moving to Database CRUD, let's make sure your Heroku live deployment is r
 ### HTML Validation
 The rendered HTML for all pages was validated using the W3C Markup Validator.
 ![W3C HTML Validation Result](documentation/testing/html-validation.png)
-https://validator.w3.org/nu/?doc=https%3A%2F%2Fcoffee-cpr-d6756e17eee2.herokuapp.com%2F
+
+![CSS Validation](documentation/testing/css-validator.png)
