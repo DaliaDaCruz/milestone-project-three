@@ -1,5 +1,5 @@
 def cart_counter(request):
-    """Context processor to make cart item count available to all templates safely."""
+    """Context processor to make cart item work"""
     cart = request.session.get('cart', {})
     total_count = 0
 

@@ -207,3 +207,4 @@ class ExtraViewsTests(TestCase):
         self.client.login(username='testuser', password='password123')
         response = self.client.get(reverse('register'))
         self.assertRedirects(response, reverse('dashboard'))
+        

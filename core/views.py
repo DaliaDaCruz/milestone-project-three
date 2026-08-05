@@ -5,15 +5,12 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.contrib import messages
-
 from .models import Machine, Order 
 
-
-# ==========================================
 # AUTHENTICATION VIEWS
-# ==========================================
 
 def register(request):
+
     if request.user.is_authenticated:
         return redirect('dashboard')
 
@@ -56,10 +53,8 @@ def user_logout(request):
     messages.info(request, 'You have successfully logged out.')
     return redirect('index')
 
-
-# ==========================================
 # PUBLIC PAGES & CATALOG VIEWS
-# ==========================================
+
 
 def index(request):
     return render(request, 'core/index.html')
@@ -89,10 +84,8 @@ def dashboard(request):
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'core/dashboard.html', {'orders': orders})
 
+# CART & CHECKOUT VIEWS 
 
-# ==========================================
-# CART & CHECKOUT VIEWS (Session-Based)
-# ==========================================
 
 def cart(request):
     cart_session = request.session.get('cart', {})
@@ -164,9 +157,9 @@ def checkout(request):
         request.session['cart'] = {}
         
         return redirect('order_success', order_number=order_number)
-
     return render(request, 'core/checkout.html')
 
-
 def order_success(request, order_number):
+
+
     return render(request, 'core/order_success.html', {'order_number': order_number})

@@ -17,6 +17,6 @@ class BookingForm(forms.ModelForm):
             'notes': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 4,
-                'placeholder': 'Tell us about your machine make, model, or any specific issue...',
+                'placeholder': 'Tell us about your machine make, model',
             }),
         }

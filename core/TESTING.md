@@ -47,3 +47,21 @@ The rendered HTML for all pages was validated using the W3C Markup Validator.
 ![W3C HTML Validation Result](documentation/testing/html-validation.png)
 
 ![CSS Validation](documentation/testing/css-validator.png)
+
+## Manual Feature Testing
+
+| Feature | Action | Expected Result | Pass/Fail |
+| :--- | :--- | :--- | :--- |
+| **Navbar Links** | Click each page link in header | Directs to correct view without broken links | Pass |
+| **Authentication** | Register a test account & log in | Success flash message appears; session persists | Pass |
+| **Catalog & Cart** | Add, update, and remove items | Cart totals update correctly; item count reflects state | Pass |
+| **Form Inputs** | Submit forms with empty required fields | Browser/Django error alerts prevent invalid submission | Pass |
+| **Defensive URLs** | Access `/checkout/` directly while logged out | Redirects safely to login view | Pass |
+| **Custom 404** | Type a non-existent URL (e.g., `/xyz`) | Renders custom styled `404.html` error page | Pass |
+
+## Browser Compatibility
+
+The live site was tested across multiple web browsers to ensure visual consistency and full functionality:
+* **Google Chrome:** Fully functional, layout and styles render as expected.
+* **Mozilla Firefox:** Fully functional, no CSS layout bugs observed.
+* **Microsoft Edge / Safari:** Fully functional, navigation and interactive elements behave correctly.
