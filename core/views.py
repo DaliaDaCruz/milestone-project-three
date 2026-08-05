@@ -231,7 +231,7 @@ def custom_500(request):
     """Custom 500 handler."""
     return render(request, 'core/500.html', status=500)
 
-    def cart(request):
+def cart(request):
     """Render the shopping basket/cart page."""
     cart_data = request.session.get('cart', {})
     cart_items = []
