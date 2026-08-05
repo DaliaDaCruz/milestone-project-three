@@ -1,1 +1,1 @@
-web: gunicorn --chdir coffee_cpr coffee_cpr.wsgi:application
+web: gunicorn --chdir subfolder coffeecpr.wsgi --log-file -
