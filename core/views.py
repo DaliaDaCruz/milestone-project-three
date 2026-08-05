@@ -78,6 +78,41 @@ def dashboard(request):
     }
     return render(request, 'core/dashboard.html', context)
 
+def cart(request):
+    """Render the shopping basket/cart page."""
+    cart_data = request.session.get('cart', {})
+    cart_items = []
+    subtotal = Decimal('0.00')
+
+    if cart_data:
+        machine_ids = [int(pk) for pk in cart_data.keys()]
+        machines = Machine.objects.filter(id__in=machine_ids)
+
+        for machine in machines:
+            quantity = cart_data.get(str(machine.id)) or cart_data.get(machine.id) or 0
+            if quantity > 0:
+                item_total = machine.price * quantity
+                subtotal += item_total
+
+                cart_items.append({
+                    'machine': machine,
+                    'quantity': quantity,
+                    'item_total': item_total,
+                })
+
+    shipping = Decimal('0.00')
+    tax = subtotal * Decimal('0.20')
+    total = subtotal + tax
+
+    context = {
+        'cart_items': cart_items,
+        'subtotal': subtotal,
+        'shipping': shipping,
+        'tax': tax,
+        'total': total,
+    }
+    return render(request, 'core/cart.html', context)
+
 
 def add_to_cart(request, machine_id):
     """Add a machine to the session-based shopping cart."""
