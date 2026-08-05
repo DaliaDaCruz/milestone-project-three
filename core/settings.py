@@ -19,6 +19,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'your-fallback-dev-key')
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    '*',
     'coffee-cpr-d6756e17eee2.herokuapp.com',
     '.herokuapp.com',
     'localhost',
