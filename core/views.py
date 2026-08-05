@@ -74,7 +74,7 @@ def services(request):
     return render(request, 'core/services.html')
 
 
-@login_required
+@login_required(login_url='user_login')
 def booking(request):
     return render(request, 'core/booking.html')
 
@@ -132,15 +132,15 @@ def add_to_cart(request, machine_id):
 
 @require_POST
 def remove_from_cart(request, machine_id):
-    cart_session = request.session.get('cart', {})
-    str_id = str(machine_id)
-
-    if str_id in cart_session:
-        del cart_session[str_id]
-        request.session['cart'] = cart_session
-        messages.success(request, 'Item removed from cart.')
-
-    return redirect('catalog')
+    if request.method =='POST':
+        cart = request.session.get('cart', {})
+        machine_id_str = str(machine_id)
+        if machine_id_str in cart:
+            del cart[machine_id_str]
+            request.session['cart'] = cart
+            request.session.modified = True
+            
+    return redirect('cart')
 
 
 @login_required
