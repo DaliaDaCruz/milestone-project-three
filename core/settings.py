@@ -16,7 +16,7 @@ if os.path.isfile(BASE_DIR / 'env.py'):
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-fallback-dev-key')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'coffee-cpr-d6756e17eee2.herokuapp.com',
@@ -55,7 +55,7 @@ WSGI_APPLICATION = "core.wsgi.application"  # Keep this one only!
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'core' / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,7 +100,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # AppDirectoriesFinder automatically finds core/static/ core files
 STATICFILES_FINDERS = [
