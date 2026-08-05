@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath coffee_cpr.wsgi:application
+web: gunicorn coffee_cpr.wsgi:application
