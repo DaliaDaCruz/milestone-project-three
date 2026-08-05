@@ -16,7 +16,7 @@ if os.path.isfile(BASE_DIR / 'env.py'):
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-fallback-dev-key')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '*',
