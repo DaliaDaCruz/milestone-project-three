@@ -14,8 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if os.path.isfile(BASE_DIR / 'env.py'):
     import env  # type: ignore
 
-# Ensure SECRET_KEY is set in Heroku Config Vars when DEBUG is False
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'your-fallback-dev-key')
 
 DEBUG = False
 
@@ -24,7 +23,6 @@ ALLOWED_HOSTS = [
     'coffee-cpr.herokuapp.com',
     'localhost',
     '127.0.0.1',
-    '.herokuapp.com',
 ]
 
 # Application definition
