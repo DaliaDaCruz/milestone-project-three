@@ -51,7 +51,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "urls"
-WSGI_APPLICATION = "wsgi.application"
+WSGI_APPLICATION = "coffee_cpr.wsgi.application"
 
 TEMPLATES = [
     {
