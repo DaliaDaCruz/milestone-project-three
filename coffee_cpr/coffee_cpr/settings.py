@@ -50,7 +50,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "coffee_cpr.urls"
+ROOT_URLCONF = "urls"
+WSGI_APPLICATION = "wsgi.application"
 
 TEMPLATES = [
     {
