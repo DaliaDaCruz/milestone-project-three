@@ -50,7 +50,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "coffee_cpr.urls"
+ROOT_URLCONF = "urls"
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "coffee_cpr.wsgi.application"
+WSGI_APPLICATION = "wsgi.application"
 
 # Database Configuration (Reads Heroku DATABASE_URL or defaults to SQLite)
 DATABASES = {
