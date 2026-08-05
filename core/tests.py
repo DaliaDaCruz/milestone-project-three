@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
-from .models import Machine, Booking, Order, OrderItem
+from .models import Machine, Booking, Order
 
 
 class ModelTests(TestCase):
@@ -72,18 +72,21 @@ class ViewTests(TestCase):
         pages = ['index', 'catalog', 'booking']
         for page in pages:
             response = self.client.get(reverse(page))
-            self.assertEqual(response.status_code, 200, f"Failed on page: {page}")
+            self.assertEqual(
+                response.status_code, 200, f"Failed on page: {page}"
+            )
 
     def test_machine_detail_view(self):
         """Test machine detail page returns 200 for valid slug."""
-        response = self.client.get(reverse('machine_detail', kwargs={'slug': self.machine.slug}))
+        url = reverse('machine_detail', kwargs={'slug': self.machine.slug})
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Commercial Brewer")
 
     def test_dashboard_login_required(self):
-        """Test that unauthenticated users are redirected when accessing dashboard."""
+        """Test unauthenticated users are redirected on dashboard access."""
         response = self.client.get(reverse('dashboard'))
-        self.assertEqual(response.status_code, 302)  # Redirects to login
+        self.assertEqual(response.status_code, 302)
 
     def test_dashboard_authenticated(self):
         """Test that logged-in users can access the dashboard."""
@@ -93,7 +96,7 @@ class ViewTests(TestCase):
 
     def test_booking_form_submission(self):
         """Test submitting a new booking request creates a database entry."""
-        response = self.client.post(reverse('booking'), {
+        self.client.post(reverse('booking'), {
             'name': 'John Doe',
             'email': 'john@example.com',
             'service': 'routine'
@@ -117,7 +120,7 @@ class CartLogicTests(TestCase):
         """Test adding an item to the session cart."""
         url = reverse('add_to_cart', kwargs={'machine_id': self.machine.id})
         response = self.client.get(url, follow=True)
-        
+
         self.assertEqual(response.status_code, 200)
         session = self.client.session
         self.assertIn(str(self.machine.id), session['cart'])
@@ -129,7 +132,9 @@ class CartLogicTests(TestCase):
         session['cart'] = {str(self.machine.id): 1}
         session.save()
 
-        url = reverse('remove_from_cart', kwargs={'machine_id': self.machine.id})
+        url = reverse(
+            'remove_from_cart', kwargs={'machine_id': self.machine.id}
+        )
         response = self.client.get(url, follow=True)
 
         self.assertEqual(response.status_code, 200)
@@ -139,7 +144,11 @@ class CartLogicTests(TestCase):
 
 class ExtraViewsTests(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='testuser', password='password123', email='test@example.com')
+        self.user = User.objects.create_user(
+            username='testuser',
+            password='password123',
+            email='test@example.com'
+        )
         self.machine = Machine.objects.create(
             name='Test Machine',
             slug='test-machine',
@@ -151,7 +160,7 @@ class ExtraViewsTests(TestCase):
         session = self.client.session
         session['cart'] = {str(self.machine.id): 2}
         session.save()
-        
+
         response = self.client.get(reverse('checkout'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'core/checkout.html')
@@ -178,11 +187,15 @@ class ExtraViewsTests(TestCase):
         self.assertEqual(Order.objects.count(), 1)
         order = Order.objects.first()
         self.assertEqual(order.full_name, 'Jane Doe')
-        self.assertRedirects(response, reverse('order_success', kwargs={'order_number': order.order_number}))
+        redirect_url = reverse(
+            'order_success', kwargs={'order_number': order.order_number}
+        )
+        self.assertRedirects(response, redirect_url)
 
     def test_order_success_view(self):
         """Test order success template rendering."""
-        response = self.client.get(reverse('order_success', kwargs={'order_number': 'TEST1234'}))
+        url = reverse('order_success', kwargs={'order_number': 'TEST1234'})
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_register_get_view(self):
@@ -191,7 +204,7 @@ class ExtraViewsTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_register_authenticated_redirect(self):
-        """Test authenticated user visiting register page redirects to dashboard."""
+        """Test authenticated user on register page redirects to dashboard."""
         self.client.login(username='testuser', password='password123')
         response = self.client.get(reverse('register'))
         self.assertRedirects(response, reverse('dashboard'))
@@ -199,5 +212,6 @@ class ExtraViewsTests(TestCase):
     def test_user_logout_view(self):
         """Test logging out user."""
         self.client.login(username='testuser', password='password123')
-        response = self.client.get(reverse('logout'))  # Updated to match core/urls.py name='logout'
+        response = self.client.get(reverse('logout'))
         self.assertRedirects(response, reverse('index'))
+        

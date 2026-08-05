@@ -14,9 +14,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if os.path.isfile(BASE_DIR / 'env.py'):
     import env  # type: ignore
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dh-hvpt%q9k^1g&j$9ij=s0v(diu4epd0p&y8)t#lc@%wq7k$f')
+# Ensure SECRET_KEY is set in Heroku Config Vars when DEBUG is False
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = False if os.environ.get('DEBUG') == 'False' else True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'coffee-cpr-d6756e17eee2.herokuapp.com',
@@ -51,7 +52,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "coffee_cpr.urls"
-WSGI_APPLICATION = "coffee_cpr.wsgi.application"
+WSGI_APPLICATION = "coffee_cpr.wsgi.application"  # Keep this one only!
 
 TEMPLATES = [
     {
@@ -69,8 +70,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = "wsgi.application"
 
 # Database Configuration (Reads Heroku DATABASE_URL or defaults to SQLite)
 DATABASES = {
@@ -97,8 +96,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "core" / "static"]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# AppDirectoriesFinder automatically finds core/static/ core files
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
 
 STORAGES = {
     "default": {

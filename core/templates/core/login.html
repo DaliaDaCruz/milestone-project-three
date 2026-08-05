@@ -8,11 +8,17 @@
         <div class="col-md-6 col-lg-5">
             <div class="card shadow-sm border-0 rounded-4">
                 <div class="card-body p-4 p-md-5">
-                    <h2 class="text-center fw-bold mb-4">Welcome Back ☕</h2>
+                    <h2 class="text-center fw-bold mb-4">
+                        Welcome Back <span role="img" aria-label="Coffee Cup">☕</span>
+                    </h2>
 
-                    <!-- DISPLAY FORM LEVEL ERRORS (e.g. Invalid Credentials) -->
-                    {% if form.errors %}
-                        <div class="alert alert-danger small py-2">
+                    <!-- Global / Non-field Errors -->
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <div class="alert alert-danger small py-2 mb-3 rounded-3">{{ error }}</div>
+                        {% endfor %}
+                    {% elif form.errors %}
+                        <div class="alert alert-danger small py-2 mb-3 rounded-3">
                             Invalid username or password. Please try again.
                         </div>
                     {% endif %}
@@ -22,19 +28,39 @@
 
                         <div class="mb-3">
                             <label for="id_username" class="form-label fw-semibold">Username</label>
-                            <input type="text" name="username" id="id_username" class="form-control" placeholder="Enter your username" required autofocus>
+                            <input type="text" 
+                                   name="username" 
+                                   id="id_username" 
+                                   class="form-control" 
+                                   placeholder="Enter your username" 
+                                   value="{{ form.username.value|default:'' }}"
+                                   required 
+                                   autofocus>
+                            {% for error in form.username.errors %}
+                                <div class="text-danger small mt-1">{{ error }}</div>
+                            {% endfor %}
                         </div>
 
                         <div class="mb-3">
                             <label for="id_password" class="form-label fw-semibold">Password</label>
-                            <input type="password" name="password" id="id_password" class="form-control" placeholder="Enter your password" required>
+                            <input type="password" 
+                                   name="password" 
+                                   id="id_password" 
+                                   class="form-control" 
+                                   placeholder="Enter your password" 
+                                   required>
+                            {% for error in form.password.errors %}
+                                <div class="text-danger small mt-1">{{ error }}</div>
+                            {% endfor %}
                         </div>
 
                         <button type="submit" class="btn btn-dark w-100 py-2 mt-3 fw-semibold">Log In</button>
                     </form>
 
                     <div class="text-center mt-4">
-                        <small class="text-muted">Need an account? <a href="{% url 'register' %}" class="fw-semibold">Sign up here</a></small>
+                        <small class="text-muted">
+                            Need an account? <a href="{% url 'register' %}" class="text-dark fw-semibold">Sign up here</a>
+                        </small>
                     </div>
                 </div>
             </div>

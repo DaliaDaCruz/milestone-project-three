@@ -1,4 +1,3 @@
-import uuid
 from decimal import Decimal
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
@@ -38,7 +37,7 @@ def booking(request):
         service = request.POST.get('service')
         email = request.POST.get('email')
         name = request.POST.get('name')
-        
+
         if service and email and name:
             Booking.objects.create(
                 user=request.user if request.user.is_authenticated else None,
@@ -46,7 +45,10 @@ def booking(request):
                 email=email,
                 service=service,
             )
-            messages.success(request, "Your repair/service request has been submitted successfully!")
+            messages.success(
+                request,
+                "Your repair/service request has been submitted successfully!"
+            )
             return redirect('dashboard')
         else:
             messages.error(request, "Please fill in all required fields.")
@@ -59,9 +61,13 @@ def booking(request):
 
 @login_required
 def dashboard(request):
-    """Render user dashboard with user details, bookings, order history, and activity."""
-    user_bookings = Booking.objects.filter(user=request.user).order_by('-created_at')
-    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    """Render user dashboard with user details, bookings, and activity."""
+    user_bookings = Booking.objects.filter(
+        user=request.user
+    ).order_by('-created_at')
+    orders = Order.objects.filter(
+        user=request.user
+    ).order_by('-created_at')
     featured_machines = Machine.objects.all()[:3]
 
     context = {
@@ -78,10 +84,10 @@ def add_to_cart(request, machine_id):
     machine = get_object_or_404(Machine, id=machine_id)
     cart = request.session.get('cart', {})
     str_id = str(machine_id)
-    
+
     cart[str_id] = cart.get(str_id, 0) + 1
     request.session['cart'] = cart
-    
+
     messages.success(request, f"Added {machine.name} to your basket!")
     return redirect(request.META.get('HTTP_REFERER', 'catalog'))
 
@@ -91,12 +97,12 @@ def remove_from_cart(request, machine_id):
     machine = get_object_or_404(Machine, id=machine_id)
     cart = request.session.get('cart', {})
     str_id = str(machine_id)
-    
+
     if str_id in cart:
         del cart[str_id]
         request.session['cart'] = cart
         messages.info(request, f"Removed {machine.name} from your basket.")
-        
+
     return redirect(request.META.get('HTTP_REFERER', 'catalog'))
 
 
@@ -115,7 +121,7 @@ def checkout(request):
             if quantity > 0:
                 subtotal = machine.price * quantity
                 total_price += subtotal
-                
+
                 cart_items.append({
                     'machine': machine,
                     'name': machine.name,
@@ -129,12 +135,20 @@ def checkout(request):
             messages.error(request, "Your basket is empty!")
             return redirect('catalog')
 
-        full_name = request.POST.get('full_name', request.user.get_full_name() or request.user.username)
-        email = request.POST.get('email', request.user.email)
+        default_name = (
+            request.user.get_full_name() or request.user.username
+            if request.user.is_authenticated else ''
+        )
+        full_name = request.POST.get('full_name', default_name)
+        email = request.POST.get(
+            'email',
+            request.user.email if request.user.is_authenticated else ''
+        )
         address = request.POST.get('address', '')
         city = request.POST.get('city', '')
         postcode = request.POST.get('postcode', '')
 
+        import uuid
         order_number = str(uuid.uuid4()).split('-')[0].upper()
 
         order = Order.objects.create(
@@ -157,7 +171,10 @@ def checkout(request):
             )
 
         request.session['cart'] = {}
-        messages.success(request, f"Order #{order_number} placed successfully!")
+        messages.success(
+            request,
+            f"Order #{order_number} placed successfully!"
+        )
         return redirect('order_success', order_number=order_number)
 
     context = {
@@ -173,24 +190,29 @@ def checkout(request):
 
 def order_success(request, order_number):
     """Render confirmation page after placing an order."""
-    return render(request, 'core/order_success.html', {'order_number': order_number})
+    return render(
+        request, 'core/order_success.html', {'order_number': order_number}
+    )
 
 
 def register(request):
     """Handle user registration."""
     if request.user.is_authenticated:
         return redirect('dashboard')
-        
+
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # Log the user in immediately after registering
-            messages.success(request, f"Welcome to Coffee CPR, {user.username}!")
+            login(request, user)
+            messages.success(
+                request,
+                f"Welcome to Coffee CPR, {user.username}!"
+            )
             return redirect('dashboard')
     else:
         form = UserCreationForm()
-        
+
     return render(request, 'core/register.html', {'form': form})
 
 

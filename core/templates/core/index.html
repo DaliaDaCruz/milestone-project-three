@@ -9,19 +9,35 @@
         <div class="row justify-content-center">
             <div class="col-md-9 col-lg-8 position-relative">
                 
-                <!-- ☕ Circular Image (Positioned behind text) -->
-                <img src="{% static 'core/img/circular_img.jpg' %}" alt="" class="circle-bg-accent">
+                <!-- Circular Image Accent -->
+                <img src="{% static 'core/img/circular_img.jpg' %}" 
+                     alt="Coffee machine servicing background" 
+                     class="circle-bg-accent">
 
-                <!-- Text Layer (Positioned on top) -->
+                <!-- Text Layer -->
                 <div class="hero-content py-4">
-<h1 class="display-3 fw-bold mb-3">☕ Coffee CPR</h1>
-                <p class="lead mb-4 fs-4">We provide professional repairs to your coffee machine! From changing a valve to a full service repair, we have you covered.
-                    Our team of experts is dedicated to ensuring your coffee machine is in top condition, so your clients can enjoy the perfect cup every time.
-In addition, we offer a wide range of coffee machines for sale. 
-Browse our selection and find the perfect coffee machine to suit your needs. Explore our catalogue today and elevate your coffee experience!
+                    <h1 class="display-3 fw-bold mb-3">
+                        <span role="img" aria-label="Coffee Cup">☕</span> Coffee CPR
+                    </h1>
+                    <p class="lead mb-4 fs-4">
+                        We provide professional repairs for commercial and domestic coffee machines. 
+                        From changing a valve to a full service overhaul, we have you covered.
+                    </p>
+                    <p class="mb-4">
+                        Our expert team is dedicated to keeping your espresso equipment in peak condition. 
+                        We also offer a premium range of coffee machines and accessories for sale.
+                    </p>
+                    
+                    <div class="d-flex justify-content-center gap-2 mt-4">
+                        <a href="{% url 'catalog' %}" class="btn btn-dark btn-lg px-4 fw-semibold">
+                            Explore Catalog
+                        </a>
+                        <a href="{% url 'services' %}" class="btn btn-outline-light btn-lg px-4 fw-semibold">
+                            Book Servicing
+                        </a>
+                    </div>
+                </div>
 
-                </p>
-                <a href="{% url 'catalog' %}" class="btn btn-primary btn-lg px-4 me-2">Explore Catalog</a>
             </div>
         </div>
     </div>
