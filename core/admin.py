@@ -5,6 +5,7 @@ from .models import Machine, Booking, Product, Order, OrderItem
 @admin.register(Machine)
 class MachineAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'price')
+    prepopulated_fields = {'slug': ('name',)}
     search_fields = ('name', 'description')
 
 
@@ -41,4 +42,3 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
     list_display = ('order', 'machine', 'price', 'quantity')
-    

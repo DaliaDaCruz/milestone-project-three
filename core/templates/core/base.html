@@ -1,55 +1,121 @@
-<!-- Footer -->
-<footer style="background-color: #212529 !important; color: #ffffff !important;" class="py-4 mt-5">
-  <div class="container">
-    <div class="row gy-4">
-      
-      <!-- Business Info & Description -->
-      <div class="col-md-4">
-        <h5 style="color: #ffffff !important;">Coffee CPR</h5>
-        <p class="small" style="color: #d1d5db !important;">Bringing your coffee machines back to life with expert service and quality parts.</p>
-      </div>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Coffee CPR{% endblock %}</title>
 
-      <!-- Direct Contact Details -->
-      <div class="col-md-4">
-        <h5 style="color: #ffffff !important;">Contact Us</h5>
-        <ul class="list-unstyled small">
-          <li class="mb-2">
-            <i class="fas fa-envelope me-2" style="color: #ffffff !important;"></i>
-            <a href="mailto:support@coffeecpr.com" class="text-decoration-none" style="color: #ffffff !important;">support@coffeecpr.com</a>
-          </li>
-          <li class="mb-2">
-            <i class="fas fa-phone me-2" style="color: #ffffff !important;"></i>
-            <a href="tel:+1234567890" class="text-decoration-none" style="color: #ffffff !important;">+1 (234) 567-890</a>
-          </li>
-          <li class="mb-2">
-            <i class="fas fa-map-marker-alt me-2" style="color: #ffffff !important;"></i>
-            <span style="color: #ffffff !important;">123 Coffee Lane, Brewtown</span>
-          </li>
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Your Custom CSS -->
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="{% url 'index' %}">Coffee CPR</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'catalog' %}">Catalog</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'cart' %}">Basket</a></li>
+          {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'user_logout' %}">Logout</a></li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+          {% endif %}
         </ul>
       </div>
+    </div>
+  </nav>
 
-      <!-- Social Media Channels -->
-      <div class="col-md-4">
-        <h5 style="color: #ffffff !important;">Follow Us</h5>
-        <div class="d-flex gap-3 fs-4 mt-2">
-          <a href="https://facebook.com/yourbusiness" target="_blank" rel="noopener" aria-label="Facebook" style="color: #ffffff !important;">
-            <i class="fab fa-facebook"></i>
-          </a>
-          <a href="https://instagram.com/yourbusiness" target="_blank" rel="noopener" aria-label="Instagram" style="color: #ffffff !important;">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://tiktok.com/@yourbusiness" target="_blank" rel="noopener" aria-label="TikTok" style="color: #ffffff !important;">
-            <i class="fab fa-tiktok"></i>
-          </a>
+  <!-- Flash Messages -->
+  {% if messages %}
+    <div class="container mt-3">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Main Content Block -->
+  <main class="flex-grow-1">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer style="background-color: #212529 !important; color: #ffffff !important;" class="py-4 mt-5">
+    <div class="container">
+      <div class="row gy-4">
+        
+        <!-- Business Info & Description -->
+        <div class="col-md-4">
+          <h5 style="color: #ffffff !important;">Coffee CPR</h5>
+          <p class="small" style="color: #d1d5db !important;">Bringing your coffee machines back to life with expert service and quality parts.</p>
+        </div>
+
+        <!-- Direct Contact Details -->
+        <div class="col-md-4">
+          <h5 style="color: #ffffff !important;">Contact Us</h5>
+          <ul class="list-unstyled small">
+            <li class="mb-2">
+              <i class="fas fa-envelope me-2" style="color: #ffffff !important;"></i>
+              <a href="mailto:support@coffeecpr.com" class="text-decoration-none" style="color: #ffffff !important;">support@coffeecpr.com</a>
+            </li>
+            <li class="mb-2">
+              <i class="fas fa-phone me-2" style="color: #ffffff !important;"></i>
+              <a href="tel:+1234567890" class="text-decoration-none" style="color: #ffffff !important;">+1 (234) 567-890</a>
+            </li>
+            <li class="mb-2">
+              <i class="fas fa-map-marker-alt me-2" style="color: #ffffff !important;"></i>
+              <span style="color: #ffffff !important;">123 Coffee Lane, Brewtown</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Social Media Channels -->
+        <div class="col-md-4">
+          <h5 style="color: #ffffff !important;">Follow Us</h5>
+          <div class="d-flex gap-3 fs-4 mt-2">
+            <a href="https://facebook.com/yourbusiness" target="_blank" rel="noopener" aria-label="Facebook" style="color: #ffffff !important;">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://instagram.com/yourbusiness" target="_blank" rel="noopener" aria-label="Instagram" style="color: #ffffff !important;">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://tiktok.com/@yourbusiness" target="_blank" rel="noopener" aria-label="TikTok" style="color: #ffffff !important;">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+
       </div>
 
+      <hr class="my-3" style="border-color: #495057 !important;">
+      
+      <div class="text-center small" style="color: #a0aec0 !important;">
+        &copy; {% now "Y" %} Coffee CPR. All rights reserved.
+      </div>
     </div>
+  </footer>
 
-    <hr class="my-3" style="border-color: #495057 !important;">
-    
-    <div class="text-center small" style="color: #a0aec0 !important;">
-      &copy; {% now "Y" %} Coffee CPR. All rights reserved.
-    </div>
-  </div>
-</footer>
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
