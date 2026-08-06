@@ -1,5 +1,22 @@
 [
 {
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$7uRZmnOQE3TDHgXrF89n41$22xUs/JRyElMEWp+kePuOiaeerp27kF0DMXGLuBghcY=",
+        "last_login": "2026-08-02T16:07:08.200Z",
+        "is_superuser": true,
+        "username": "Coffee_CPR",
+        "first_name": "",
+        "last_name": "",
+        "email": "coffee_cpr@info.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-08-01T18:25:52.184Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
     "model": "core.machine",
     "pk": 1,
     "fields": {
@@ -75,9 +92,7 @@
     "model": "core.booking",
     "pk": 1,
     "fields": {
-        "user": [
-            "Coffee_CPR"
-        ],
+        "user": 1,
         "name": "dalia",
         "email": "dahliacruz3@gmail.com",
         "service": "routine",
@@ -90,9 +105,7 @@
     "model": "core.booking",
     "pk": 2,
     "fields": {
-        "user": [
-            "Coffee_CPR"
-        ],
+        "user": 1,
         "name": "dalia",
         "email": "dahliacruz3@gmail.com",
         "service": "routine",
@@ -105,9 +118,7 @@
     "model": "core.booking",
     "pk": 3,
     "fields": {
-        "user": [
-            "Coffee_CPR"
-        ],
+        "user": 1,
         "name": "Coffee_CPR",
         "email": "coffee_cpr@info.com",
         "service": "routine",
@@ -120,9 +131,7 @@
     "model": "core.booking",
     "pk": 4,
     "fields": {
-        "user": [
-            "Coffee_CPR"
-        ],
+        "user": 1,
         "name": "Coffee_CPR",
         "email": "coffee_cpr@info.com",
         "service": "routine",
@@ -135,9 +144,7 @@
     "model": "core.booking",
     "pk": 5,
     "fields": {
-        "user": [
-            "Coffee_CPR"
-        ],
+        "user": 1,
         "name": "Dalia",
         "email": "dahliacruz3@gmail.com",
         "service": "routine",
@@ -150,9 +157,7 @@
     "model": "core.booking",
     "pk": 6,
     "fields": {
-        "user": [
-            "Coffee_CPR"
-        ],
+        "user": 1,
         "name": "Coffee_CPR",
         "email": "coffee_cpr@info.com",
         "service": "routine",
@@ -165,9 +170,7 @@
     "model": "core.booking",
     "pk": 7,
     "fields": {
-        "user": [
-            "Coffee_CPR"
-        ],
+        "user": 1,
         "name": "Coffee_CPR",
         "email": "coffee_cpr@info.com",
         "service": "routine",
@@ -180,9 +183,7 @@
     "model": "core.booking",
     "pk": 8,
     "fields": {
-        "user": [
-            "Coffee_CPR"
-        ],
+        "user": 1,
         "name": "Coffee_CPR",
         "email": "coffee_cpr@info.com",
         "service": "routine",
@@ -195,9 +196,7 @@
     "model": "core.booking",
     "pk": 9,
     "fields": {
-        "user": [
-            "Coffee_CPR"
-        ],
+        "user": 1,
         "name": "Coffee_CPR",
         "email": "coffee_cpr@info.com",
         "service": "repair",
