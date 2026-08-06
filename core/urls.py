@@ -16,5 +16,6 @@ urlpatterns = [
     path('checkout/success/', views.checkout_success, name='checkout_success'),
     path('checkout/cancel/', views.checkout_cancel, name='checkout_cancel'),
     path('machine/<slug:slug>/', views.machine_detail, name='machine_detail'),
-    path('logout/', views.user_logout, name='logout'),  # Note: name='logout'
+    path('logout/', views.user_logout, name='logout'),  
+    
 ]

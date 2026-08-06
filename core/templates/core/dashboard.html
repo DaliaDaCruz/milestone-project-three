@@ -25,8 +25,8 @@
                         <span><strong>Member Since:</strong> {{ user.date_joined|date:"M Y" }}</span>
                     </div>
                     <div>
-                        <!-- FIXED: Changed 'logout' to 'user_logout' to match urls.py -->
-                        <form method="POST" action="{% url 'user_logout' %}" class="d-inline">
+                        
+                        <form method="POST" action="{% url 'logout' %}" class="d-inline">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-outline-danger btn-sm">Log Out</button>
                         </form>

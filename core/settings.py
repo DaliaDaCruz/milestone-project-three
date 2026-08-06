@@ -16,14 +16,15 @@ if os.path.isfile(BASE_DIR / 'env.py'):
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-fallback-dev-key')
 
-# Set DEBUG to True only if explicitly set in environment (e.g. env.py)
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+
+DEBUG = 'DEVELOPMENT'in os.environ
 
 ALLOWED_HOSTS = [
     'coffee-cpr-d6756e17eee2.herokuapp.com',
     '.herokuapp.com',
     'localhost',
     '127.0.0.1',
+    'app.github.dev',
 ]
 
 # Application definition
