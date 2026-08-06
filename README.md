@@ -1,17 +1,14 @@
 # milestone-project-three
 
-## Testing
-Please refer to the [TESTING.md](TESTING.md) file for all unit testing, automated coverage reports, and manual testing documentation.
-
 #Coffee CPR
 ##Giving coffee machines a second shot!
 
 Coffee CPR is a full-stack e-commerce and service platform built with Django, designed for coffee machine repairs, servicing, and commercial coffee equipment sales. Born out of the morning rush and high demand for reliable espresso setups in London, this web application connects coffee shop owners and enthusiasts with professional machine repair services and authentic Italian coffee equipment.
 
 # Page Links & Live Deployment
-Live Site (Heroku): [Insert your Heroku app URL here]
+Live Site (Heroku): [https://coffee-cpr-d6756e17eee2.herokuapp.com/catalog/]
 
-# GitHub Repository: [Insert your GitHub repository link here]
+# GitHub Repository: [https://github.com/DaliaDaCruz/milestone-project-three]
 
 # Table of Contents
 ## Design
@@ -134,3 +131,6 @@ Code: Custom CSS path resolution and Django configuration structured with assist
 Media: Stock coffee imagery provided by Pixabay.
 
 Educational Disclaimer: All company names and branding elements used in this project are for educational and portfolio demonstration purposes only.
+
+# Testing
+Please refer to the [TESTING.md](TESTING.md) file for all unit testing, automated coverage reports, and manual testing documentation.
