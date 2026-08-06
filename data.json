@@ -1,0 +1,106 @@
+[
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$7uRZmnOQE3TDHgXrF89n41$22xUs/JRyElMEWp+kePuOiaeerp27kF0DMXGLuBghcY=",
+        "last_login": "2026-08-02T16:07:08.200Z",
+        "is_superuser": true,
+        "username": "Coffee_CPR",
+        "first_name": "",
+        "last_name": "",
+        "email": "coffee_cpr@info.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-08-01T18:25:52.184Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "j8fva8bj9e4nrdd1vfqrdtsa9ottketc",
+    "fields": {
+        "session_data": "eyJjYXJ0Ijp7fX0:1wrlOt:4gYCmJKcxZyGNHiucWvL6vsiAIPYuFAz0-Dz4D3Zg_k",
+        "expire_date": "2026-08-19T23:51:55.831Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "lyimzxdcbkvw84i6c9me3zwwu1q63o89",
+    "fields": {
+        "session_data": ".eJxVjDsOgzAQBe_iOrL8AdZQps8ZrN21HZNEIGFTIe4ekCiS9s282YTHtWa_lrj4MYhBaHH73Qj5HacThBdOz1nyPNVlJHkq8qJFPuYQP_fL_QtkLPl4px4ITKc6ZyCAUxasdYkcaDSJemIm1CoqYgDTgCJoYuoDaEOtbQGPKONSxbDt-xcGADrF:1wqx7e:EBD_3gyGKHV4fPXd9R0nr2pBictGxIobXM3GJ-HOUE4",
+        "expire_date": "2026-08-17T18:10:46.817Z"
+    }
+},
+{
+    "model": "core.machine",
+    "pk": 1,
+    "fields": {
+        "name": "Galileo",
+        "slug": "galileo",
+        "description": "High-performance commercial espresso machine with precise dual-boiler temperature control, rotatable steam wands, and sleek stainless steel housing.",
+        "specs": "Dual Boiler System, 2.5L Capacity, PID Temperature Control, 15 Bar Pressure, Rotatable Steam Wand",
+        "price": "3570.00",
+        "image": ""
+    }
+},
+{
+    "model": "core.machine",
+    "pk": 2,
+    "fields": {
+        "name": "Lira",
+        "slug": "lira",
+        "description": "Compact and versatile commercial espresso machine featuring automatic volumetric dosing, an integrated cup warmer, and quick-steam valves designed for high-efficiency cafes.",
+        "specs": "Single Boiler with Heat Exchanger, Volumetric Touchpad Controls, 1.8L Water Tank, Anti-Suction Steam Valves",
+        "price": "2850.00",
+        "image": ""
+    }
+},
+{
+    "model": "core.machine",
+    "pk": 3,
+    "fields": {
+        "name": "Classica",
+        "slug": "classica",
+        "description": "Traditional Italian-style espresso machine crafted with a polished chrome exterior, manual lever operation, and classic heat-exchanger system for authentic coffee extraction.",
+        "specs": "Manual E61 Group Head, 2.0L Copper Boiler, Polished Chrome Finish, Water Line Connection, Classic Pressure Gauge",
+        "price": "2400.00",
+        "image": ""
+    }
+},
+{
+    "model": "core.machine",
+    "pk": 4,
+    "fields": {
+        "name": "Classic2 Gruppi Manual",
+        "slug": "classic-2-gruppi-manual",
+        "description": "Heavy-duty dual-group manual espresso machine built for high-volume service. Features dual lever-operated group heads, independent temperature stability, and a massive copper boiler system.",
+        "specs": "2 Group Heads, Manual Lever Extraction, 11L Copper Boiler, Dual Steam Wands, High-Volume Commercial Duty",
+        "price": "4200.00",
+        "image": ""
+    }
+},
+{
+    "model": "core.machine",
+    "pk": 5,
+    "fields": {
+        "name": "Monza",
+        "slug": "monza",
+        "description": "Sleek, modern commercial espresso machine designed for consistency and high speed, featuring automated cleaning cycles, digital touch controls, and dual independent boilers.",
+        "specs": "Dual Boiler, Digital Touch Interface, 3.0L Water Capacity, Automatic Cleaning Cycle, Ergonomic Steam Handles",
+        "price": "3950.00",
+        "image": ""
+    }
+},
+{
+    "model": "core.machine",
+    "pk": 6,
+    "fields": {
+        "name": "Fiorenzato F64",
+        "slug": "fiorenzato-f64",
+        "description": "Professional commercial electronic coffee grinder featuring a full-color intuitive touchscreen, micro-metric grind adjustment, and high-speed flat steel burrs for precise, consistent dosing.",
+        "specs": "64mm Flat Steel Burrs, Touchscreen Display, Micro-Metric Adjustment, 1.5kg Bean Hopper, Dose Statistics Tracking",
+        "price": "1150.00",
+        "image": ""
+    }
+}

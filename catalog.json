@@ -1,0 +1,287 @@
+[
+{
+    "model": "core.machine",
+    "pk": 1,
+    "fields": {
+        "name": "Galileo",
+        "slug": "galileo",
+        "description": "High-performance commercial espresso machine with precise dual-boiler temperature control, rotatable steam wands, and sleek stainless steel housing.",
+        "specs": "Dual Boiler System, 2.5L Capacity, PID Temperature Control, 15 Bar Pressure, Rotatable Steam Wand",
+        "price": "3570.00",
+        "image": ""
+    }
+},
+{
+    "model": "core.machine",
+    "pk": 2,
+    "fields": {
+        "name": "Lira",
+        "slug": "lira",
+        "description": "Compact and versatile commercial espresso machine featuring automatic volumetric dosing, an integrated cup warmer, and quick-steam valves designed for high-efficiency cafes.",
+        "specs": "Single Boiler with Heat Exchanger, Volumetric Touchpad Controls, 1.8L Water Tank, Anti-Suction Steam Valves",
+        "price": "2850.00",
+        "image": ""
+    }
+},
+{
+    "model": "core.machine",
+    "pk": 3,
+    "fields": {
+        "name": "Classica",
+        "slug": "classica",
+        "description": "Traditional Italian-style espresso machine crafted with a polished chrome exterior, manual lever operation, and classic heat-exchanger system for authentic coffee extraction.",
+        "specs": "Manual E61 Group Head, 2.0L Copper Boiler, Polished Chrome Finish, Water Line Connection, Classic Pressure Gauge",
+        "price": "2400.00",
+        "image": ""
+    }
+},
+{
+    "model": "core.machine",
+    "pk": 4,
+    "fields": {
+        "name": "Classic2 Gruppi Manual",
+        "slug": "classic-2-gruppi-manual",
+        "description": "Heavy-duty dual-group manual espresso machine built for high-volume service. Features dual lever-operated group heads, independent temperature stability, and a massive copper boiler system.",
+        "specs": "2 Group Heads, Manual Lever Extraction, 11L Copper Boiler, Dual Steam Wands, High-Volume Commercial Duty",
+        "price": "4200.00",
+        "image": ""
+    }
+},
+{
+    "model": "core.machine",
+    "pk": 5,
+    "fields": {
+        "name": "Monza",
+        "slug": "monza",
+        "description": "Sleek, modern commercial espresso machine designed for consistency and high speed, featuring automated cleaning cycles, digital touch controls, and dual independent boilers.",
+        "specs": "Dual Boiler, Digital Touch Interface, 3.0L Water Capacity, Automatic Cleaning Cycle, Ergonomic Steam Handles",
+        "price": "3950.00",
+        "image": ""
+    }
+},
+{
+    "model": "core.machine",
+    "pk": 6,
+    "fields": {
+        "name": "Fiorenzato F64",
+        "slug": "fiorenzato-f64",
+        "description": "Professional commercial electronic coffee grinder featuring a full-color intuitive touchscreen, micro-metric grind adjustment, and high-speed flat steel burrs for precise, consistent dosing.",
+        "specs": "64mm Flat Steel Burrs, Touchscreen Display, Micro-Metric Adjustment, 1.5kg Bean Hopper, Dose Statistics Tracking",
+        "price": "1150.00",
+        "image": ""
+    }
+},
+{
+    "model": "core.booking",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "Coffee_CPR"
+        ],
+        "name": "dalia",
+        "email": "dahliacruz3@gmail.com",
+        "service": "routine",
+        "preferred_date": null,
+        "notes": null,
+        "created_at": "2026-08-02T21:50:57.383Z"
+    }
+},
+{
+    "model": "core.booking",
+    "pk": 2,
+    "fields": {
+        "user": [
+            "Coffee_CPR"
+        ],
+        "name": "dalia",
+        "email": "dahliacruz3@gmail.com",
+        "service": "routine",
+        "preferred_date": null,
+        "notes": null,
+        "created_at": "2026-08-02T21:51:17.426Z"
+    }
+},
+{
+    "model": "core.booking",
+    "pk": 3,
+    "fields": {
+        "user": [
+            "Coffee_CPR"
+        ],
+        "name": "Coffee_CPR",
+        "email": "coffee_cpr@info.com",
+        "service": "routine",
+        "preferred_date": null,
+        "notes": null,
+        "created_at": "2026-08-02T21:57:26.791Z"
+    }
+},
+{
+    "model": "core.booking",
+    "pk": 4,
+    "fields": {
+        "user": [
+            "Coffee_CPR"
+        ],
+        "name": "Coffee_CPR",
+        "email": "coffee_cpr@info.com",
+        "service": "routine",
+        "preferred_date": null,
+        "notes": null,
+        "created_at": "2026-08-02T21:57:43.693Z"
+    }
+},
+{
+    "model": "core.booking",
+    "pk": 5,
+    "fields": {
+        "user": [
+            "Coffee_CPR"
+        ],
+        "name": "Dalia",
+        "email": "dahliacruz3@gmail.com",
+        "service": "routine",
+        "preferred_date": null,
+        "notes": null,
+        "created_at": "2026-08-02T22:01:44.299Z"
+    }
+},
+{
+    "model": "core.booking",
+    "pk": 6,
+    "fields": {
+        "user": [
+            "Coffee_CPR"
+        ],
+        "name": "Coffee_CPR",
+        "email": "coffee_cpr@info.com",
+        "service": "routine",
+        "preferred_date": null,
+        "notes": null,
+        "created_at": "2026-08-02T22:12:40.717Z"
+    }
+},
+{
+    "model": "core.booking",
+    "pk": 7,
+    "fields": {
+        "user": [
+            "Coffee_CPR"
+        ],
+        "name": "Coffee_CPR",
+        "email": "coffee_cpr@info.com",
+        "service": "routine",
+        "preferred_date": null,
+        "notes": null,
+        "created_at": "2026-08-02T22:21:41.956Z"
+    }
+},
+{
+    "model": "core.booking",
+    "pk": 8,
+    "fields": {
+        "user": [
+            "Coffee_CPR"
+        ],
+        "name": "Coffee_CPR",
+        "email": "coffee_cpr@info.com",
+        "service": "routine",
+        "preferred_date": null,
+        "notes": null,
+        "created_at": "2026-08-03T15:41:07.534Z"
+    }
+},
+{
+    "model": "core.booking",
+    "pk": 9,
+    "fields": {
+        "user": [
+            "Coffee_CPR"
+        ],
+        "name": "Coffee_CPR",
+        "email": "coffee_cpr@info.com",
+        "service": "repair",
+        "preferred_date": null,
+        "notes": null,
+        "created_at": "2026-08-03T16:02:27.568Z"
+    }
+},
+{
+    "model": "core.product",
+    "pk": 1,
+    "fields": {
+        "name": "Espresso Roast Blend",
+        "category": "Beans",
+        "price": "14.99",
+        "description": null,
+        "badge": "Best Seller",
+        "image_url": null,
+        "created_at": "2026-08-01T22:08:43.940Z"
+    }
+},
+{
+    "model": "core.product",
+    "pk": 2,
+    "fields": {
+        "name": "Ethiopian Yirgacheffe",
+        "category": "Beans",
+        "price": "16.50",
+        "description": null,
+        "badge": "Single Origin",
+        "image_url": null,
+        "created_at": "2026-08-01T22:08:43.951Z"
+    }
+},
+{
+    "model": "core.product",
+    "pk": 3,
+    "fields": {
+        "name": "Decaf Swiss Water Process",
+        "category": "Beans",
+        "price": "15.00",
+        "description": null,
+        "badge": "Decaf",
+        "image_url": null,
+        "created_at": "2026-08-01T22:08:43.954Z"
+    }
+},
+{
+    "model": "core.product",
+    "pk": 4,
+    "fields": {
+        "name": "Stainless Steel French Press",
+        "category": "Equipment",
+        "price": "34.99",
+        "description": null,
+        "badge": "Gear",
+        "image_url": null,
+        "created_at": "2026-08-01T22:08:43.957Z"
+    }
+},
+{
+    "model": "core.product",
+    "pk": 5,
+    "fields": {
+        "name": "Precision Coffee Scale",
+        "category": "Equipment",
+        "price": "24.95",
+        "description": null,
+        "badge": "Gear",
+        "image_url": null,
+        "created_at": "2026-08-01T22:08:43.959Z"
+    }
+},
+{
+    "model": "core.product",
+    "pk": 6,
+    "fields": {
+        "name": "Coffee CPR Travel Mug",
+        "category": "Merchandise",
+        "price": "19.99",
+        "description": null,
+        "badge": "New",
+        "image_url": null,
+        "created_at": "2026-08-01T22:08:43.962Z"
+    }
+}
+]
