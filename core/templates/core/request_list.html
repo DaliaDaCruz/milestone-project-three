@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="row mb-4 align-items-center">
+    <div class="col">
+        <h1 class="h2">Service & Repair Requests</h1>
+        <p class="text-muted">Manage active coffee machine repair tickets.</p>
+    </div>
+    <div class="col-auto">
+        <a href="{% url 'request_create' %}" class="btn btn-primary">+ Submit Request</a>
+    </div>
+</div>
+
+<div class="card shadow-sm mb-5">
+    <div class="card-body">
+        {% if requests %}
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Customer</th>
+                        <th>Machine Model</th>
+                        <th>Issue</th>
+                        <th>Status</th>
+                        <th>Date Submitted</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for req in requests %}
+                    <tr>
+                        <td><strong>{{ req.customer_name }}</strong></td>
+                        <td>{{ req.machine_model }}</td>
+                        <td>{{ req.issue_description|truncatewords:8 }}</td>
+                        <td><span class="badge bg-info text-dark">{{ req.status }}</span></td>
+                        <td>{{ req.created_at|date:"M d, Y" }}</td>
+                        <td class="text-end">
+                            <a href="{% url 'request_update' req.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a href="{% url 'request_delete' req.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-center text-muted my-3">No repair requests submitted yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
