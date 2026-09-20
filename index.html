@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee CPR | Giving your machine a second shot!</title>
+
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Inline Coffee Cup Favicon (SVG) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        espresso: {
+                            900: '#1c100b',
+                            800: '#2C1810',
+                            700: '#42281d',
+                            600: '#5c3829',
+                        },
+                        crema: {
+                            500: '#C88A36',
+                            600: '#b07527',
+                            100: '#FDF6EB',
+                        },
+                        roast: {
+                            500: '#E07A5F',
+                        },
+                        warmbg: '#faf8f5',
+                        warmcard: '#ffffff',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'coffee-glow': '0 20px 40px -15px rgba(44, 24, 16, 0.15)',
+                        'circle-glow': '0 25px 50px -12px rgba(200, 138, 54, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c88a36;
+            border-radius: 4px;
+        }
+
+        /* Custom Hero Background Styling with Semi-Transparent Overlay */
+        .hero-bg-overlay {
+            background-image: linear-gradient(rgba(28, 16, 11, 0.85), rgba(44, 24, 16, 0.9)), url('assets/images/hero.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-espresso-900 font-sans antialiased selection:bg-crema-500 selection:text-white">
+
+    <!-- Navigation Bar (Pure Tailwind, self-contained layout) -->
+    <header class="sticky top-0 z-40 bg-espresso-900/95 backdrop-blur-md border-b border-stone-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo & Name -->
+            <a href="#home" class="flex items-center gap-3">
+                <img src="assets/images/logo.jpg" alt="Coffee CPR Logo" class="h-10 w-10 object-cover rounded-full border border-crema-500/50"
+                    onerror="this.onerror=null; this.src='https://placehold.co/100x100/2C1810/C88A36?text=CPR';">
+                <span class="font-heading font-extrabold text-xl tracking-wide text-white">COFFEE CPR</span>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#home" class="text-sm font-semibold text-stone-200 hover:text-crema-500 transition-colors">Home</a>
+                <a href="#history" class="text-sm font-semibold text-stone-200 hover:text-crema-500 transition-colors">Our History</a>
+                <a href="#services" class="text-sm font-semibold text-stone-200 hover:text-crema-500 transition-colors">Services</a>
+                <a href="#gallery" class="text-sm font-semibold text-stone-200 hover:text-crema-500 transition-colors">Shop & Gallery</a>
+                <a href="#contact" class="text-sm font-semibold text-stone-200 hover:text-crema-500 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Basket Button -->
+            <button id="cart-toggle-btn" class="relative p-2.5 rounded-full bg-stone-800 hover:bg-stone-700 text-white transition-colors">
+                <i class="fa-solid fa-basket-shopping text-lg"></i>
+                <span id="cart-count-badge" class="absolute -top-1 -right-1 bg-crema-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero / Centerpiece Section with Dark Coffee Overlay -->
+    <section id="home" class="relative py-16 md:py-24 hero-bg-overlay text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center text-center max-w-4xl mx-auto">
+
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-crema-100 text-xs font-bold uppercase tracking-wider mb-8 shadow-sm backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-crema-500 animate-pulse"></span> First Aid For Your Espresso Machine
+                </div>
+
+                <h1 class="font-heading text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight tracking-tight mb-6">
+                    Resurrect Your Daily Brew!
+                </h1>
+
+                <p class="text-stone-300 text-lg sm:text-xl max-w-2xl font-normal leading-relaxed mb-10">
+                    We provide professional service and care.
+                    We bring faulty boilers, worn seals, and broken pumps back from
+                    the brink so you never have to skip a shot.
+                </p>
+
+                <!-- Centerpiece Round Image -->
+                <div class="relative my-4 group">
+                    <div class="absolute -inset-4 rounded-full bg-gradient-to-tr from-crema-500/30 via-roast-500/20 to-espresso-800/40 blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute inset-0 rounded-full border-2 border-dashed border-crema-500/60 animate-[spin_60s_linear_infinite]"></div>
+
+                    <div class="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full p-3 bg-espresso-900/80 shadow-circle-glow border border-stone-700 flex items-center justify-center overflow-hidden">
+                        <img src="assets/images/circular.jpg" alt="Espresso Machine Repair Bench"
+                            class="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-700"
+                            onerror="this.onerror=null; this.src='https://placehold.co/800x800/2C1810/C88A36?text=Coffee+CPR+Repair+Bench';">
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 mt-12 w-full sm:w-auto">
+                    <a href="#gallery" class="px-8 py-4 bg-crema-500 hover:bg-crema-600 text-white font-bold rounded-full transition-all duration-300 shadow-md hover:shadow-lg text-center">
+                        Gallery & Shop
+                    </a>
+                    <a href="#services" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-full transition-all duration-300 border border-white/20 text-center backdrop-blur-sm">
+                        Services
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Company History Section -->
+    <section id="history" class="py-20 bg-warmbg border-y border-stone-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-extrabold uppercase text-crema-500 tracking-widest bg-crema-500/10 px-3.5 py-1.5 rounded-full">Coffee is a Culture!</span>
+                <p class="text-stone-600 text-lg mt-3">From passion to a full repair workshop.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                <div class="space-y-6">
+                    <p class="text-stone-700 leading-relaxed text-base">
+                        <strong>Coffee CPR</strong> started as a result of waiting to have my own business.
+                        I have worked many years in the field, which led me to meet so many people not only interested
+                        in repairing their machines but also buying the best coffee around.
+                        With such high demand, I created my personal brand of coffee, Tipicoffee, a few years back,
+                        which eventually led me to start Coffee CPR—because you can't just sell coffee, it's also
+                        necessary to provide the best Italian coffee machines, as well as the best repair service.
+                    </p>
+                    <p class="text-stone-700 leading-relaxed text-base">
+                        Today, our slogan <em class="text-crema-600 font-semibold">"Giving your machine a second shot!"</em> represents our core vow: combining technical precision, genuine spare parts, and deep coffee expertise to extend the life of home and commercial coffee gear across the region.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200/80 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-xl bg-crema-500/10 text-crema-500 flex items-center justify-center text-xl font-bold mb-4">
+                            <i class="fa-solid fa-recycle"></i>
+                        </div>
+                        <h4 class="font-heading font-bold text-lg text-espresso-800 mb-2">Eco-Friendly Restoration</h4>
+                        <p class="text-stone-600 text-sm leading-relaxed">
+                            We've diverted over 1,200 coffee machines and grinders from landfills by repairing core components rather than replacing entire units.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200/80 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-xl bg-roast-500/10 text-roast-500 flex items-center justify-center text-xl font-bold mb-4">
+                            <i class="fa-solid fa-microscope"></i>
+                        </div>
+                        <h4 class="font-heading font-bold text-lg text-espresso-800 mb-2">Master Technical Rigor</h4>
+                        <p class="text-stone-600 text-sm leading-relaxed">
+                            Every CPR overhaul includes hydrostatic pressure testing, PID thermal checks, and optical burr alignment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-extrabold uppercase text-crema-500 tracking-widest bg-stone-100 px-3.5 py-1.5 rounded-full">Resurrection Services</span>
+                <h3 class="font-heading text-3xl sm:text-4xl font-extrabold text-espresso-900 mt-3">How We Revive Your Equipment</h3>
+                <p class="text-stone-600 mt-3 text-lg">Precision diagnostics and repair.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-warmbg p-8 rounded-3xl border border-stone-200/70 hover:border-crema-500/50 transition-all duration-300 hover:shadow-lg group">
+                    <div class="w-14 h-14 bg-crema-500/10 rounded-2xl flex items-center justify-center text-crema-500 text-2xl mb-6 group-hover:bg-crema-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h4 class="font-heading font-bold text-xl text-espresso-900 mb-3">Full Machine CPR & Descaling</h4>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-6">
+                        Complete boiler deep descaling, group head gasket overhaul, steam wand rebuild, and pressure sensor recalibration.
+                    </p>
+                </div>
+
+                <div class="bg-warmbg p-8 rounded-3xl border border-stone-200/70 hover:border-crema-500/50 transition-all duration-300 hover:shadow-lg group">
+                    <div class="w-14 h-14 bg-crema-500/10 rounded-2xl flex items-center justify-center text-crema-500 text-2xl mb-6 group-hover:bg-crema-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <h4 class="font-heading font-bold text-xl text-espresso-900 mb-3">Grinder Precision Alignment</h4>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-6">
+                        Burr replacement, micro-alignment, motor capacitor fixes, and deep chute cleaning to guarantee uniform particle distribution.
+                    </p>
+                </div>
+
+                <div class="bg-warmbg p-8 rounded-3xl border border-stone-200/70 hover:border-crema-500/50 transition-all duration-300 hover:shadow-lg group">
+                    <div class="w-14 h-14 bg-crema-500/10 rounded-2xl flex items-center justify-center text-crema-500 text-2xl mb-6 group-hover:bg-crema-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-plug-circle-bolt"></i>
+                    </div>
+                    <h4 class="font-heading font-bold text-xl text-espresso-900 mb-3">Electrical & Pump Overhaul</h4>
+                    <p class="text-stone-600 text-sm leading-relaxed mb-6">
+                        Solenoid replacement, PID thermal controller repairs, element swap, leak repairs, and vibration pump sound-proofing.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop & Gallery Section -->
+    <section id="gallery" class="py-20 bg-warmbg border-t border-stone-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-extrabold uppercase text-crema-500 tracking-widest bg-crema-500/10 px-3.5 py-1.5 rounded-full">Refurbished & Parts Store</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-espresso-900 mt-3">Shop Machines, Parts & Supplies</h2>
+                <p class="text-stone-600 mt-3 text-lg">Every refurbished machine comes with our 90-day Coffee CPR warranty.</p>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12">
+                <button class="filter-tab active px-5 py-2.5 rounded-full text-xs font-bold transition-all bg-espresso-800 text-white shadow" data-category="all">
+                    All Products
+                </button>
+                <button class="filter-tab px-5 py-2.5 rounded-full text-xs font-bold transition-all bg-white text-stone-700 hover:bg-stone-100 border border-stone-200" data-category="machines">
+                    Refurbished Machines
+                </button>
+                <button class="filter-tab px-5 py-2.5 rounded-full text-xs font-bold transition-all bg-white text-stone-700 hover:bg-stone-100 border border-stone-200" data-category="grinders">
+                    Grinders
+                </button>
+                <button class="filter-tab px-5 py-2.5 rounded-full text-xs font-bold transition-all bg-white text-stone-700 hover:bg-stone-100 border border-stone-200" data-category="parts">
+                    Spare Parts & Accessories
+                </button>
+            </div>
+
+            <!-- Dynamic Product Grid -->
+            <div id="product-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- JavaScript injects products here -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact & Booking Section -->
+    <section id="contact" class="py-20 bg-white border-t border-stone-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+                <div class="space-y-6">
+                    <span class="text-xs font-extrabold uppercase text-crema-500 tracking-widest bg-crema-500/10 px-3.5 py-1.5 rounded-full">Book A Diagnosis</span>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-espresso-900">Ready to give your machine a second shot?</h2>
+                    <p class="text-stone-600 leading-relaxed">
+                        Fill in your machine details below. We'll get back to you with a transparent diagnostic quote and turnaround estimate.
+                    </p>
+                </div>
+
+                <!-- Form Card -->
+                <div class="bg-warmbg p-8 rounded-3xl border border-stone-200/80 shadow-lg">
+                    <form onsubmit="event.preventDefault(); document.getElementById('form-feedback').classList.remove('hidden');" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">Your Name</label>
+                            <input type="text" required placeholder="e.g. Jane Doe" class="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-espresso-900 focus:outline-none focus:ring-2 focus:ring-crema-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">Machine Brand & Model</label>
+                            <input type="text" required placeholder="e.g. Sage Barista Express" class="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-espresso-900 focus:outline-none focus:ring-2 focus:ring-crema-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1">Issue Description</label>
+                            <textarea rows="3" required placeholder="e.g. No pressure building up..." class="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-espresso-900 focus:outline-none focus:ring-2 focus:ring-crema-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-espresso-800 hover:bg-crema-500 text-white font-bold rounded-xl transition-colors shadow-md text-sm">
+                            Request Diagnostic Quote
+                        </button>
+                    </form>
+                    <div id="form-feedback" class="hidden mt-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs text-center font-bold">
+                        Diagnostic request received! We will reach out shortly.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-espresso-900 text-white py-10 border-t border-espresso-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-crema-500 text-white flex items-center justify-center font-bold text-sm">
+                    <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <div>
+                    <span class="font-heading font-extrabold text-lg tracking-tight">COFFEE CPR</span>
+                    <p class="text-xs text-stone-400">Giving your machine a second shot!</p>
+                </div>
+            </div>
+            <p class="text-xs text-stone-400">&copy; 2026 Coffee CPR Workshop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Shopping Basket / Cart Slide-over Drawer -->
+    <div id="cart-drawer-backdrop" class="fixed inset-0 bg-black/50 z-50 transition-opacity duration-300 opacity-0 pointer-events-none">
+        <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-out flex flex-col">
+            <div class="p-6 border-b border-stone-200 flex items-center justify-between bg-warmbg">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-basket-shopping text-xl text-crema-500"></i>
+                    <h3 class="font-heading font-extrabold text-xl text-espresso-900">Your Basket</h3>
+                </div>
+                <button id="close-cart-btn" class="p-2 text-stone-500 hover:text-stone-800">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Cart items load here dynamically -->
+            </div>
+
+            <div class="p-6 border-t border-stone-200 bg-warmbg space-y-4">
+                <div class="flex items-center justify-between text-lg font-bold text-espresso-900">
+                    <span>Total:</span>
+                    <span id="cart-total-price">£0.00</span>
+                </div>
+                <button id="checkout-btn" type="button" class="w-full py-3.5 bg-espresso-800 hover:bg-crema-500 text-white font-bold rounded-xl transition-colors shadow">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Info Modal -->
+    <div id="info-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative space-y-4">
+            <button id="close-modal-btn" class="absolute top-4 right-4 p-2 text-stone-400 hover:text-stone-700">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div id="modal-content">
+                <!-- Modal details load here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Complete JavaScript Logic -->
+    <script>
+        const products = [
+            {
+                id: 1,
+                title: "Galileo",
+                category: "machines",
+                price: 3349.99,
+                condition: "New",
+                image: "assets/images/galileo.png",
+                specs: ["Groups Available: 2, 3, or 4 brewing groups.", "Boiler Capacity: Copper boilers range from 11 litres up to 27 litres.", "Group Head Types: Traditional temperature-compensated group."],
+                desc: "Professional commercial espresso machine made by B.F.C. srl in Italy."
+            },
+            {
+                id: 2,
+                title: "Monza",
+                category: "machines",
+                price: 3289.99,
+                condition: "New",
+                image: "assets/images/monza.png",
+                specs: ["Pressure: 20-bar pump", "Power: 1050 W", "Compatibility: Ground coffee and pods"],
+                desc: "Commercial-grade Italian espresso machine with precise thermal control."
+            },
+            {
+                id: 3,
+                title: "Lira",
+                category: "machines",
+                price: 2342.50,
+                condition: "Refurbished",
+                image: "assets/images/lira.png",
+                specs: ["Boiler Capacity: 11 to 14 liters", "Power Output: 3500W – 3800W", "Steam & Water: Dual steam wands"],
+                desc: "Commercial heat-exchange espresso machine hand-built in Italy."
+            },
+            {
+                id: 4,
+                title: "Classic2gruppi",
+                category: "machines",
+                price: 3232.50,
+                condition: "New",
+                image: "assets/images/classic2gruppi.png",
+                specs: ["Dual Boiler System: Separate boilers optimize brewing and steam."],
+                desc: "Dual boiler commercial espresso unit engineered for high-volume coffee shops."
+            },
+            {
+                id: 5,
+                title: "Classica",
+                category: "machines",
+                price: 3414.99,
+                condition: "New",
+                image: "assets/images/classica.png",
+                specs: ["Boiler Capacity: 2.3L copper boiler", "Power: 230V, 2.85 kW", "Safety: Auto water level shut-off"],
+                desc: "Manual-fill semi-professional espresso machine featuring heavy copper construction."
+            },
+            {
+                id: 6,
+                title: "Fiorenzato F64",
+                category: "grinders",
+                price: 1598.99,
+                condition: "New",
+                image: "assets/images/fiorenzato.png",
+                specs: ["Burr Type: 64mm Flat titanium-coated steel", "Bean Hopper: 1.5 kg", "Motor: 1350-1550 RPM"],
+                desc: "Commercial on-demand coffee grinder featuring precision burrs and active cooling."
+            },
+            {
+                id: 7,
+                title: "58mm Bottomless Portafilter",
+                category: "parts",
+                price: 45.00,
+                condition: "New",
+                image: "assets/images/portafilter.jpg",
+                specs: ["Basket Size: 58mm", "Material: Stainless steel with premium wood handle"],
+                desc: "Commercial grade bottomless portafilter compatible with standard E61 group heads."
+            }
+        ];
+
+        let cart = [];
+
+        // DOM Elements
+        const productGrid = document.getElementById('product-grid');
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const cartToggleBtn = document.getElementById('cart-toggle-btn');
+        const closeCartBtn = document.getElementById('close-cart-btn');
+        const cartDrawerBackdrop = document.getElementById('cart-drawer-backdrop');
+        const cartDrawer = document.getElementById('cart-drawer');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartCountBadge = document.getElementById('cart-count-badge');
+        const cartTotalPrice = document.getElementById('cart-total-price');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const infoModal = document.getElementById('info-modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+
+        // Render Product Cards
+        function renderProducts(categoryFilter = 'all') {
+            if (!productGrid) return;
+            productGrid.innerHTML = '';
+
+            const filteredProducts = categoryFilter === 'all' 
+                ? products 
+                : products.filter(p => p.category === categoryFilter);
+
+            if (filteredProducts.length === 0) {
+                productGrid.innerHTML = `<p class="col-span-full text-center text-stone-500 py-8">No products found in this category.</p>`;
+                return;
+            }
+
+            filteredProducts.forEach(product => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl border border-stone-200/80 p-5 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="relative w-full h-48 bg-stone-100 rounded-2xl overflow-hidden mb-4 border border-stone-100">
+                            <span class="absolute top-3 left-3 bg-espresso-800 text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full z-10">
+                                ${product.condition}
+                            </span>
+                            <img src="${product.image}" alt="${product.title}" class="w-full h-full object-contain p-2 hover:scale-105 transition-transform duration-300" 
+                                onerror="this.onerror=null; this.src='https://placehold.co/400x300/2C1810/C88A36?text=${encodeURIComponent(product.title)}';">
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-espresso-900 mb-1">${product.title}</h3>
+                        <p class="text-xs text-stone-500 line-clamp-2 mb-4">${product.desc}</p>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-black text-espresso-900">£${product.price.toFixed(2)}</span>
+                            <button onclick="openModal(${product.id})" class="text-xs font-bold text-crema-600 hover:text-espresso-800 underline">
+                                Specs & Info
+                            </button>
+                        </div>
+                        <button onclick="addToCart(${product.id})" class="w-full py-3 bg-espresso-800 hover:bg-crema-500 text-white font-bold rounded-xl transition-colors shadow-sm text-sm">
+                            Add to Basket
+                        </button>
+                    </div>
+                `;
+                productGrid.appendChild(card);
+            });
+        }
+
+        // Category Filter Tabs
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                filterTabs.forEach(t => {
+                    t.classList.remove('bg-espresso-800', 'text-white', 'shadow');
+                    t.classList.add('bg-white', 'text-stone-700');
+                });
+                tab.classList.remove('bg-white', 'text-stone-700');
+                tab.classList.add('bg-espresso-800', 'text-white', 'shadow');
+
+                const category = tab.getAttribute('data-category');
+                renderProducts(category);
+            });
+        });
+
+        // Cart Drawer Handlers
+        function openCart() {
+            cartDrawerBackdrop?.classList.remove('opacity-0', 'pointer-events-none');
+            cartDrawer?.classList.remove('translate-x-full');
+        }
+
+        function closeCart() {
+            cartDrawerBackdrop?.classList.add('opacity-0', 'pointer-events-none');
+            cartDrawer?.classList.add('translate-x-full');
+        }
+
+        cartToggleBtn?.addEventListener('click', openCart);
+        closeCartBtn?.addEventListener('click', closeCart);
+        cartDrawerBackdrop?.addEventListener('click', (e) => {
+            if (e.target === cartDrawerBackdrop) closeCart();
+        });
+
+        // Add Product to Cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            openCart();
+        }
+
+        // Update Cart UI
+        function updateCartUI() {
+            if (!cartItemsContainer) return;
+            cartItemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `<p class="text-center text-stone-500 py-8 text-sm">Your basket is currently empty.</p>`;
+                if (cartTotalPrice) cartTotalPrice.textContent = '£0.00';
+                if (cartCountBadge) cartCountBadge.textContent = '0';
+                return;
+            }
+
+            let total = 0;
+            let totalItems = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                totalItems += item.quantity;
+
+                const itemRow = document.createElement('div');
+                itemRow.className = "flex items-center justify-between border-b border-stone-100 pb-3";
+                itemRow.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <img src="${item.image}" alt="${item.title}" class="w-12 h-12 object-contain bg-stone-50 rounded-lg p-1 border border-stone-200"
+                             onerror="this.onerror=null; this.src='https://placehold.co/100x100/2C1810/C88A36?text=Item';">
+                        <div>
+                            <h4 class="font-bold text-sm text-espresso-900">${item.title}</h4>
+                            <span class="text-xs text-stone-500">£${item.price.toFixed(2)} x ${item.quantity}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-sm text-espresso-900">£${itemTotal.toFixed(2)}</span>
+                        <button onclick="removeFromCart(${item.id})" class="text-stone-400 hover:text-rose-500 p-1">
+                            <i class="fa-solid fa-trash-can text-xs"></i>
+                        </button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemRow);
+            });
+
+            if (cartTotalPrice) cartTotalPrice.textContent = `£${total.toFixed(2)}`;
+            if (cartCountBadge) cartCountBadge.textContent = totalItems.toString();
+        }
+
+        // Remove Item from Cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+        }
+
+        // Product Details Modal Handlers
+        function openModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product || !modalContent) return;
+
+            const specsList = product.specs.map(spec => `<li class="flex items-center gap-2"><i class="fa-solid fa-check text-crema-500 text-xs"></i> ${spec}</li>`).join('');
+
+            modalContent.innerHTML = `
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="${product.image}" alt="${product.title}" class="w-24 h-24 object-contain bg-stone-50 rounded-2xl p-2 border border-stone-100"
+                         onerror="this.onerror=null; this.src='https://placehold.co/200x200/2C1810/C88A36?text=${encodeURIComponent(product.title)}';">
+                    <div>
+                        <span class="inline-block bg-espresso-800 text-white text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full mb-1">${product.condition}</span>
+                        <h3 class="font-heading font-bold text-2xl text-espresso-900">${product.title}</h3>
+                        <p class="text-xl font-black text-crema-600">£${product.price.toFixed(2)}</p>
+                    </div>
+                </div>
+                <p class="text-stone-600 text-sm leading-relaxed mb-4">${product.desc}</p>
+                <div class="border-t border-stone-100 pt-3">
+                    <h4 class="font-bold text-xs uppercase tracking-wider text-espresso-900 mb-2">Technical Specifications</h4>
+                    <ul class="text-xs text-stone-600 space-y-1.5">${specsList}</ul>
+                </div>
+                <button onclick="addToCart(${product.id}); closeModal();" class="w-full mt-6 py-3 bg-espresso-800 hover:bg-crema-500 text-white font-bold rounded-xl transition-colors text-sm">
+                    Add to Basket
+                </button>
+            `;
+
+            infoModal?.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeModal() {
+            infoModal?.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        closeModalBtn?.addEventListener('click', closeModal);
+        infoModal?.addEventListener('click', (e) => {
+            if (e.target === infoModal) closeModal();
+        });
+
+        checkoutBtn?.addEventListener('click', () => {
+            if (cart.length === 0) return;
+            alert('Proceeding to secure checkout...');
+        });
+
+        // Initialize Application
+        renderProducts();
+    </script>
+</body>
+
+</html>

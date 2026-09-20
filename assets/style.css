@@ -1,0 +1,64 @@
+/* Import a rounded, organic font reminiscent of coffee beans */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap');
+
+/* Navbar Container */
+.navbar {
+  background-color: #3C2A21; /* Rich Espresso Brown */
+  padding: 0.8rem 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Fredoka', cursive, sans-serif; 
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Brand Logo & Name */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 50%; 
+}
+
+.brand-text {
+  color: #F5EBE0; 
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Navigation Links */
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 1.8rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: #D5B9B1; 
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;  
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #FFF;
+  background-color: #1A120B; 
+}
