@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Coffee CPR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        espresso: { 900: '#1c100b', 800: '#2C1810' },
+                        crema: { 500: '#C88A36', 600: '#b07527' },
+                        warmbg: '#faf8f5',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-warmbg text-espresso-900 font-sans antialiased p-6">
+    <div class="max-w-xl mx-auto bg-white p-8 rounded-3xl border border-stone-200 shadow-md">
+        <h1 class="text-2xl font-bold mb-4">Complete Your Order</h1>
+        <p class="text-sm text-stone-600 mb-6">Review your items and enter payment details below.</p>
+        
+        <form method="POST" action="{% url 'checkout' %}">
+            {% csrf_token %}
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1">Full Name</label>
+                    <input type="text" name="full_name" required class="w-full p-3 rounded-xl border border-stone-200">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1">Delivery Address</label>
+                    <textarea name="address" required class="w-full p-3 rounded-xl border border-stone-200" rows="3"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-espresso-800 text-white font-bold rounded-xl hover:bg-crema-500 transition-colors">
+                    Place Order
+                </button>
+            </div>
+        </form>
+        <a href="{% url 'request_list' %}" class="block text-center mt-4 text-xs font-bold text-crema-600 underline">Return to Shop</a>
+    </div>
+</body>
+
+</html>

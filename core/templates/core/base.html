@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffee CPR - Espresso Repair & Sales</title>
+
+    <!-- W3C Validated SVG Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E☕%3C/text%3E%3C/svg%3E">
+
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+
+<body class="bg-light d-flex flex-column min-vh-100">
 
     <!-- Navigation Menu -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
@@ -16,12 +24,27 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'request_list' %}">Home & Requests</a>
                     </li>
+
+                    <!-- Basket Trigger Button -->
+                    <li class="nav-item ms-lg-2 my-2 my-lg-0">
+                        <button class="btn btn-outline-light position-relative" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#basketOffcanvas" aria-controls="basketOffcanvas">
+                            🛒 Basket
+                            {% if request.session.basket %}
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{ request.session.basket|length }}
+                            </span>
+                            {% endif %}
+                        </button>
+                    </li>
+
                     <li class="nav-item">
-                        <a class="btn btn-warning ms-2" href="{% url 'request_create' %}">+ Request Repair</a>
+                        <a class="btn btn-warning ms-lg-2" href="{% url 'request_create' %}">+ Request Repair</a>
                     </li>
                 </ul>
             </div>
@@ -29,15 +52,61 @@
     </nav>
 
     <!-- Main Content Container -->
-    <main class="container my-4">
+    <main class="container my-4 flex-grow-1">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
         {% block content %}
         {% endblock %}
     </main>
 
-    <footer class="text-center py-4 text-muted border-top mt-5">
+    <!-- Offcanvas Side Basket Drawer -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="basketOffcanvas" aria-labelledby="basketOffcanvasLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold" id="basketOffcanvasLabel">🛒 Your Basket</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column justify-content-between">
+
+            <!-- Basket Items Area -->
+            <div id="basket-items-list" class="overflow-auto mb-3">
+                {% if request.session.basket %}
+                <!-- Dynamic session items will list here -->
+                <p class="text-muted">Items added to your session basket will appear here.</p>
+                {% else %}
+                <p class="text-muted text-center my-4">Your basket is currently empty.</p>
+                {% endif %}
+            </div>
+
+            <!-- Basket Footer & Checkout Link -->
+            <div class="border-top pt-3">
+                <div class="d-flex justify-content-between align-items-center mb-3 fs-5 fw-bold">
+                    <span>Total:</span>
+                    <span id="basket-total-price">£0.00</span>
+                </div>
+
+                <!-- Updated Proceed to Checkout Button (Points directly to Django Checkout View) -->
+                <a href="{% url 'checkout' %}" class="btn btn-warning w-100 py-2 fw-bold">
+                    Proceed to Checkout
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 text-muted border-top mt-auto">
         <small>&copy; Coffee CPR. All rights reserved.</small>
     </footer>
 
+    <!-- Bootstrap 5 JavaScript Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

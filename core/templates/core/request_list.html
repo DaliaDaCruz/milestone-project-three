@@ -1,10 +1,62 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-<div class="row mb-4 align-items-center">
+<!-- Hero / Header Section -->
+<div class="p-5 mb-4 bg-dark text-white rounded-3">
+    <div class="container-fluid py-3 d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="display-5 fw-bold">☕ Coffee CPR</h1>
+            <p class="col-md-8 fs-4">Professional espresso machine maintenance, parts, and refurbishing services.</p>
+            <a href="{% url 'request_create' %}" class="btn btn-warning btn-lg fw-bold">+ Submit Repair Request</a>
+        </div>
+        
+        <!-- Checkout Button inside Hero Section -->
+        <div>
+            <a href="{% url 'checkout' %}" class="btn btn-success btn-lg fw-bold">
+                🛒 Proceed to Checkout
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Products & Services Catalog -->
+<div class="mb-5">
+    <h2 class="h3 mb-3">Featured Equipment & Services</h2>
+    {% if products %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for product in products %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    {% if product.image_url %}
+                        <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.title }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <span class="badge bg-secondary mb-2">{{ product.condition }}</span>
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text text-muted">{{ product.description|truncatewords:15 }}</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center">
+                        <span class="fw-bold fs-5 text-success">£{{ product.price }}</span>
+                        <a href="{% url 'request_create' %}" class="btn btn-sm btn-outline-primary">Inquire</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            No products or machinery listed yet. You can add items via the <a href="/admin" class="alert-link">Django Admin Panel</a>!
+        </div>
+    {% endif %}
+</div>
+
+<hr class="my-5">
+
+<!-- Service Requests Section -->
+<div class="row mb-3 align-items-center">
     <div class="col">
-        <h1 class="h2">Service & Repair Requests</h1>
-        <p class="text-muted">Manage active coffee machine repair tickets.</p>
+        <h2 class="h3">Active Service & Repair Requests</h2>
+        <p class="text-muted">Manage submitted repair tickets.</p>
     </div>
     <div class="col-auto">
         <a href="{% url 'request_create' %}" class="btn btn-primary">+ Submit Request</a>

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from .models import Product, ServiceRequest
 from .forms import ServiceRequestForm
 
@@ -14,6 +15,7 @@ def request_create(request):
         form = ServiceRequestForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Service request submitted successfully!")
             return redirect('request_list')
     else:
         form = ServiceRequestForm()
@@ -26,6 +28,7 @@ def request_update(request, pk):
         form = ServiceRequestForm(request.POST, instance=service_req)
         if form.is_valid():
             form.save()
+            messages.success(request, "Service request updated!")
             return redirect('request_list')
     else:
         form = ServiceRequestForm(instance=service_req)
@@ -36,5 +39,17 @@ def request_delete(request, pk):
     service_req = get_object_or_404(ServiceRequest, pk=pk)
     if request.method == 'POST':
         service_req.delete()
+        messages.success(request, "Service request deleted.")
         return redirect('request_list')
     return render(request, 'core/request_confirm_delete.html', {'request_item': service_req})
+
+# 5. CHECKOUT: Handle basket and order placement
+def checkout_view(request):
+    basket = request.session.get('basket', {})
+
+    if request.method == 'POST':
+        request.session['basket'] = {}
+        messages.success(request, "Thank you! Your order has been placed successfully.")
+        return redirect('request_list')
+
+    return render(request, 'core/checkout.html', {'basket': basket})
