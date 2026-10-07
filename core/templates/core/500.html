@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container text-center py-5">
+    <h1 class="display-1 fw-bold text-warning">500</h1>
+    <h2 class="mb-3">Server Error</h2>
+    <p class="lead text-muted">
+        Something spilled on our end! We're working on fixing the issue.
+    </p>
+    <a href="{% url 'request_list' %}" class="btn btn-primary mt-3">
+        Return to Home
+    </a>
+</div>
+{% endblock %}

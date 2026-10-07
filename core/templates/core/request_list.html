@@ -1,103 +1,72 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
 {% block content %}
-<!-- Hero / Header Section -->
-<div class="p-5 mb-4 bg-dark text-white rounded-3">
-    <div class="container-fluid py-3 d-flex justify-content-between align-items-center">
-        <div>
-            <h1 class="display-5 fw-bold">☕ Coffee CPR</h1>
-            <p class="col-md-8 fs-4">Professional espresso machine maintenance, parts, and refurbishing services.</p>
-            <a href="{% url 'request_create' %}" class="btn btn-warning btn-lg fw-bold">+ Submit Repair Request</a>
-        </div>
-        
-        <!-- Checkout Button inside Hero Section -->
-        <div>
-            <a href="{% url 'checkout' %}" class="btn btn-success btn-lg fw-bold">
-                🛒 Proceed to Checkout
-            </a>
-        </div>
-    </div>
-</div>
+<main class="py-10 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
 
-<!-- Products & Services Catalog -->
-<div class="mb-5">
-    <h2 class="h3 mb-3">Featured Equipment & Services</h2>
-    {% if products %}
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for product in products %}
-            <div class="col">
-                <div class="card h-100 shadow-sm">
-                    {% if product.image_url %}
-                        <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.title }}" style="height: 200px; object-fit: cover;">
-                    {% endif %}
-                    <div class="card-body">
-                        <span class="badge bg-secondary mb-2">{{ product.condition }}</span>
-                        <h5 class="card-title">{{ product.title }}</h5>
-                        <p class="card-text text-muted">{{ product.description|truncatewords:15 }}</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center">
-                        <span class="fw-bold fs-5 text-success">£{{ product.price }}</span>
-                        <a href="{% url 'request_create' %}" class="btn btn-sm btn-outline-primary">Inquire</a>
-                    </div>
+        <!-- Hero / Intro Banner -->
+        <div class="bg-espresso-900 text-white rounded-3xl p-8 md:p-12 shadow-xl border border-stone-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div class="space-y-2 max-w-2xl">
+                <h1 class="font-heading font-extrabold text-3xl sm:text-4xl text-crema-100">Coffee CPR Workshop</h1>
+                <p class="text-stone-300 text-sm sm:text-base leading-relaxed">
+                    Professional espresso machine maintenance, parts, and refurbishing services. Giving your machine a second shot!
+                </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+                <a href="{% url 'request_create' %}" class="py-3 px-5 bg-crema-500 hover:bg-crema-600 text-white font-bold rounded-xl text-xs sm:text-sm transition-all shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> Submit Repair Request
+                </a>
+                <a href="{% url 'checkout' %}" class="py-3 px-5 bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold rounded-xl text-xs sm:text-sm transition-all flex items-center gap-2">
+    <i class="fa-solid fa-cart-shopping"></i> Proceed to Checkout
+</a>
+            </div>
+        </div>
+
+        <!-- Featured Equipment & Services Section -->
+        <section class="space-y-6">
+            <div class="border-b border-stone-200 pb-4 flex justify-between items-end">
+                <div>
+                    <h2 class="font-heading font-bold text-2xl text-espresso-900">Featured Equipment & Services</h2>
+                    <p class="text-stone-500 text-xs sm:text-sm">Browse available refurbished machines, gear, and workshop service packages.</p>
                 </div>
             </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <div class="alert alert-info" role="alert">
-            No products or machinery listed yet. You can add items via the <a href="/admin" class="alert-link">Django Admin Panel</a>!
-        </div>
-    {% endif %}
-</div>
 
-<hr class="my-5">
+            <!-- Empty State / Product Grid -->
+            <div class="bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm text-center space-y-3">
+                <div class="w-12 h-12 bg-crema-100/50 text-crema-600 rounded-full flex items-center justify-center text-xl mx-auto">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+                <h3 class="font-heading font-bold text-lg text-espresso-900">No products or machinery listed yet</h3>
+                <p class="text-stone-500 text-sm max-w-md mx-auto">
+                    You can add equipment, parts, and service items via the 
+                    <a href="/admin/" class="text-crema-600 font-bold hover:underline">Django Admin Panel</a>!
+                </p>
+            </div>
+        </section>
 
-<!-- Service Requests Section -->
-<div class="row mb-3 align-items-center">
-    <div class="col">
-        <h2 class="h3">Active Service & Repair Requests</h2>
-        <p class="text-muted">Manage submitted repair tickets.</p>
-    </div>
-    <div class="col-auto">
-        <a href="{% url 'request_create' %}" class="btn btn-primary">+ Submit Request</a>
-    </div>
-</div>
+        <!-- Active Service & Repair Requests Section -->
+        <section class="space-y-6">
+            <div class="border-b border-stone-200 pb-4 flex justify-between items-end">
+                <div>
+                    <h2 class="font-heading font-bold text-2xl text-espresso-900">Active Service & Repair Requests</h2>
+                    <p class="text-stone-500 text-xs sm:text-sm">Manage and track your submitted repair tickets.</p>
+                </div>
+                <a href="{% url 'request_create' %}" class="text-xs sm:text-sm font-bold text-crema-600 hover:text-crema-700 transition-colors flex items-center gap-1">
+                    <i class="fa-solid fa-plus text-xs"></i> Submit Request
+                </a>
+            </div>
 
-<div class="card shadow-sm mb-5">
-    <div class="card-body">
-        {% if requests %}
-        <div class="table-responsive">
-            <table class="table table-hover align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Customer</th>
-                        <th>Machine Model</th>
-                        <th>Issue</th>
-                        <th>Status</th>
-                        <th>Date Submitted</th>
-                        <th class="text-end">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for req in requests %}
-                    <tr>
-                        <td><strong>{{ req.customer_name }}</strong></td>
-                        <td>{{ req.machine_model }}</td>
-                        <td>{{ req.issue_description|truncatewords:8 }}</td>
-                        <td><span class="badge bg-info text-dark">{{ req.status }}</span></td>
-                        <td>{{ req.created_at|date:"M d, Y" }}</td>
-                        <td class="text-end">
-                            <a href="{% url 'request_update' req.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a>
-                            <a href="{% url 'request_delete' req.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        {% else %}
-        <p class="text-center text-muted my-3">No repair requests submitted yet.</p>
-        {% endif %}
+            <!-- Request Table / List -->
+            <div class="bg-white rounded-3xl border border-stone-200/80 shadow-sm overflow-hidden p-8 text-center space-y-3">
+                <div class="w-12 h-12 bg-stone-100 text-stone-400 rounded-full flex items-center justify-center text-xl mx-auto">
+                    <i class="fa-solid fa-wrench"></i>
+                </div>
+                <h3 class="font-heading font-bold text-lg text-espresso-900">No repair requests submitted yet</h3>
+                <p class="text-stone-500 text-sm">When you log machine service tickets, they will show up here.</p>
+            </div>
+        </section>
+
     </div>
-</div>
+</main>
 {% endblock %}

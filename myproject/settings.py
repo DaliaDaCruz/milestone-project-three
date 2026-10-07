@@ -25,8 +25,15 @@ SECRET_KEY = "django-insecure-geld+ntd8dc)4b@is+^1ag7)=&7qw10@_92ug4ra8kr*!^4*&4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.herokuapp.com']
+# settings.py
+ALLOWED_HOSTS = ['*']
 
+# allow github codespace codes
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.github.dev',
+    'https://*.app.github.dev',
+    'https://*.gitpod.io',
+]
 
 # Application definition
 
@@ -57,7 +64,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [],
-        "APP_DIRS": True,
+        "APP_DIRS": True,  # Tells Django to look inside core/templates/
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.request",
