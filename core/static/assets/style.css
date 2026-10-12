@@ -6,7 +6,10 @@
   background-color: #3C2A21; 
   padding: 0.8rem 1.5rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  font-family: 'Fredoka', cursive, sans-serif; 
+  font-family: 'Fredoka', cursive, sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .nav-container {
@@ -28,8 +31,9 @@
 .nav-logo {
   width: 40px;
   height: 40px;
-  object-fit: contain;
-  border-radius: 50%; 
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #D5B9B1;
 }
 
 .brand-text {
@@ -42,8 +46,9 @@
 /* Navigation Links */
 .nav-menu {
   display: flex;
+  align-items: center;
   list-style: none;
-  gap: 1.8rem;
+  gap: 1.5rem;
   margin: 0;
   padding: 0;
 }
@@ -51,14 +56,15 @@
 .nav-link {
   color: #D5B9B1; 
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 500;
-  padding: 0.4rem 0.8rem;
+  padding: 0.4rem 0.9rem;
   border-radius: 20px;  
   transition: all 0.3s ease;
 }
 
-.nav-link:hover {
-  color: #FFF;
+.nav-link:hover,
+.nav-link.active {
+  color: #FFFFFF;
   background-color: #1A120B; 
 }

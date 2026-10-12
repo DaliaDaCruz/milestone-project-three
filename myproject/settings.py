@@ -28,9 +28,11 @@ ALLOWED_HOSTS = ['*']
 
 # allow github codespace codes
 CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
     'https://*.github.dev',
-    'https://*.app.github.dev',
     'https://*.gitpod.io',
+    'https://*.herokuapp.com',
 ]
 
 # Application definition
@@ -131,7 +133,16 @@ STORAGES = {
     },
 }
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# Session & Security Settings
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG

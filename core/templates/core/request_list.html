@@ -24,13 +24,59 @@
         </div>
 
         <!-- Featured Equipment & Services Section -->
-        <section class="space-y-6">
-            <div class="border-b border-stone-200 pb-4 flex justify-between items-end">
-                <div>
-                    <h2 class="font-heading font-bold text-2xl text-espresso-900">Featured Equipment & Services</h2>
-                    <p class="text-stone-500 text-xs sm:text-sm">Browse available refurbished machines, gear, and workshop service packages.</p>
+       <!-- Featured Equipment & Services Section -->
+<section class="space-y-6">
+    <div class="border-b border-stone-200 pb-4 flex justify-between items-end">
+        <div>
+            <h2 class="font-heading font-bold text-2xl text-espresso-900">Featured Equipment & Services</h2>
+            <p class="text-stone-500 text-xs sm:text-sm">Browse available refurbished machines, gear, and workshop service packages.</p>
+        </div>
+    </div>
+
+    {% if products %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for product in products %}
+                <div class="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-sm flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-48 object-contain rounded-2xl bg-warmbg p-2 border border-stone-100">
+                        {% else %}
+                            <img src="{% static 'images/default-placeholder.jpg' %}" alt="{{ product.name }}" class="w-full h-48 object-contain rounded-2xl bg-warmbg p-2 border border-stone-100" onerror="this.onerror=null; this.src='https://placehold.co/300x200/2C1810/C88A36?text=Coffee+CPR';">
+                        {% endif %}
+                        
+                        <h3 class="font-heading font-bold text-lg text-espresso-900">{{ product.name }}</h3>
+                        <p class="text-stone-500 text-xs line-clamp-2">{{ product.description }}</p>
+                    </div>
+
+                    <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
+                        <span class="font-black text-lg text-espresso-900">£{{ product.price }}</span>
+                        
+                        <!-- Add to Basket Form -->
+                        <form action="{% url 'add_to_basket' product.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="py-2.5 px-4 bg-crema-500 hover:bg-crema-600 text-white font-bold rounded-xl text-xs transition-all shadow-sm flex items-center gap-1.5">
+                                <i class="fa-solid fa-cart-plus"></i> Add to Basket
+                            </button>
+                        </form>
+                    </div>
                 </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- Empty State -->
+        <div class="bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm text-center space-y-3">
+            <div class="w-12 h-12 bg-crema-100/50 text-crema-600 rounded-full flex items-center justify-center text-xl mx-auto">
+                <i class="fa-solid fa-box-open"></i>
             </div>
+            <h3 class="font-heading font-bold text-lg text-espresso-900">No products or machinery listed yet</h3>
+            <p class="text-stone-500 text-sm max-w-md mx-auto">
+                Add equipment and parts in your 
+                <a href="/admin/" class="text-crema-600 font-bold hover:underline">Django Admin Panel</a>!
+            </p>
+        </div>
+    {% endif %}
+</section>
 
             <!-- Empty State / Product Grid -->
             <div class="bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm text-center space-y-3">
