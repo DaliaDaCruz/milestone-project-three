@@ -6,106 +6,129 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
 
         <!-- Hero / Intro Banner -->
-        <div class="bg-espresso-900 text-white rounded-3xl p-8 md:p-12 shadow-xl border border-stone-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div
+            class="bg-espresso-900 text-white rounded-3xl p-8 md:p-12 shadow-xl border border-stone-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div class="space-y-2 max-w-2xl">
                 <h1 class="font-heading font-extrabold text-3xl sm:text-4xl text-crema-100">Coffee CPR Workshop</h1>
                 <p class="text-stone-300 text-sm sm:text-base leading-relaxed">
-                    Professional espresso machine maintenance, parts, and refurbishing services. Giving your machine a second shot!
+                    Professional espresso machine maintenance, parts, and refurbishing services. Giving your machine a
+                    second shot!
                 </p>
             </div>
             <div class="flex flex-wrap items-center gap-3">
-                <a href="{% url 'request_create' %}" class="py-3 px-5 bg-crema-500 hover:bg-crema-600 text-white font-bold rounded-xl text-xs sm:text-sm transition-all shadow-md flex items-center gap-2">
+                <a href="{% url 'request_create' %}"
+                    class="py-3 px-5 bg-crema-500 hover:bg-crema-600 text-white font-bold rounded-xl text-xs sm:text-sm transition-all shadow-md flex items-center gap-2">
                     <i class="fa-solid fa-plus"></i> Submit Repair Request
                 </a>
-                <a href="{% url 'checkout' %}" class="py-3 px-5 bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold rounded-xl text-xs sm:text-sm transition-all flex items-center gap-2">
-    <i class="fa-solid fa-cart-shopping"></i> Proceed to Checkout
-</a>
+                <a href="{% url 'checkout' %}"
+                    class="py-3 px-5 bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold rounded-xl text-xs sm:text-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping"></i> Proceed to Checkout
+                </a>
             </div>
         </div>
 
         <!-- Featured Equipment & Services Section -->
-       <!-- Featured Equipment & Services Section -->
-<section class="space-y-6">
-    <div class="border-b border-stone-200 pb-4 flex justify-between items-end">
-        <div>
-            <h2 class="font-heading font-bold text-2xl text-espresso-900">Featured Equipment & Services</h2>
-            <p class="text-stone-500 text-xs sm:text-sm">Browse available refurbished machines, gear, and workshop service packages.</p>
-        </div>
-    </div>
+        <section class="space-y-6">
+            <div class="border-b border-stone-200 pb-4 flex justify-between items-end">
+                <div>
+                    <h2 class="font-heading font-bold text-2xl text-espresso-900">Featured Equipment & Services</h2>
+                    <p class="text-stone-500 text-xs sm:text-sm">Browse available refurbished machines, gear, and
+                        workshop service packages.</p>
+                </div>
+            </div>
 
-    {% if products %}
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {% for product in products %}
-                <div class="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-sm flex flex-col justify-between space-y-4">
+            {% if products %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for product in products %}
+                <div
+                    class="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-sm flex flex-col justify-between space-y-4">
                     <div class="space-y-3">
                         {% if product.image %}
-                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-48 object-contain rounded-2xl bg-warmbg p-2 border border-stone-100">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}"
+                            class="w-full h-48 object-contain rounded-2xl bg-warmbg p-2 border border-stone-100">
                         {% else %}
-                            <img src="{% static 'images/default-placeholder.jpg' %}" alt="{{ product.name }}" class="w-full h-48 object-contain rounded-2xl bg-warmbg p-2 border border-stone-100" onerror="this.onerror=null; this.src='https://placehold.co/300x200/2C1810/C88A36?text=Coffee+CPR';">
+                        <img src="{% static 'images/default-placeholder.jpg' %}" alt="{{ product.name }}"
+                            class="w-full h-48 object-contain rounded-2xl bg-warmbg p-2 border border-stone-100"
+                            onerror="this.onerror=null; this.src='https://placehold.co/300x200/2C1810/C88A36?text=Coffee+CPR';">
                         {% endif %}
-                        
+
                         <h3 class="font-heading font-bold text-lg text-espresso-900">{{ product.name }}</h3>
                         <p class="text-stone-500 text-xs line-clamp-2">{{ product.description }}</p>
                     </div>
 
                     <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
                         <span class="font-black text-lg text-espresso-900">£{{ product.price }}</span>
-                        
-                        <!-- Add to Basket Form -->
-                        <form action="{% url 'add_to_basket' product.id %}" method="POST">
+
+            <!-- Add to Basket Form -->
+           <form action="{% url 'add_to_basket' product.id %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="quantity" value="1">
-                            <button type="submit" class="py-2.5 px-4 bg-crema-500 hover:bg-crema-600 text-white font-bold rounded-xl text-xs transition-all shadow-sm flex items-center gap-1.5">
+                            <button type="submit"
+                                class="py-2.5 px-4 bg-crema-500 hover:bg-crema-600 text-white font-bold rounded-xl text-xs transition-all shadow-sm flex items-center gap-1.5">
                                 <i class="fa-solid fa-cart-plus"></i> Add to Basket
                             </button>
                         </form>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <!-- Empty State -->
-        <div class="bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm text-center space-y-3">
-            <div class="w-12 h-12 bg-crema-100/50 text-crema-600 rounded-full flex items-center justify-center text-xl mx-auto">
-                <i class="fa-solid fa-box-open"></i>
+                {% endfor %}
             </div>
-            <h3 class="font-heading font-bold text-lg text-espresso-900">No products or machinery listed yet</h3>
-            <p class="text-stone-500 text-sm max-w-md mx-auto">
-                Add equipment and parts in your 
-                <a href="/admin/" class="text-crema-600 font-bold hover:underline">Django Admin Panel</a>!
-            </p>
-        </div>
-    {% endif %}
-</section>
-
-            <!-- Empty State / Product Grid -->
+            {% else %}
+            <!-- Empty State -->
             <div class="bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm text-center space-y-3">
-                <div class="w-12 h-12 bg-crema-100/50 text-crema-600 rounded-full flex items-center justify-center text-xl mx-auto">
+                <div
+                    class="w-12 h-12 bg-crema-100/50 text-crema-600 rounded-full flex items-center justify-center text-xl mx-auto">
                     <i class="fa-solid fa-box-open"></i>
                 </div>
                 <h3 class="font-heading font-bold text-lg text-espresso-900">No products or machinery listed yet</h3>
                 <p class="text-stone-500 text-sm max-w-md mx-auto">
-                    You can add equipment, parts, and service items via the 
+                    Add equipment and parts in your
                     <a href="/admin/" class="text-crema-600 font-bold hover:underline">Django Admin Panel</a>!
                 </p>
             </div>
+            {% endif %}
+        </section>
+
+        <!-- Empty State / Product Grid -->
+        <div class="bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm text-center space-y-3">
+            <div
+                class="w-12 h-12 bg-crema-100/50 text-crema-600 rounded-full flex items-center justify-center text-xl mx-auto">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
+            <h3 class="font-heading font-bold text-lg text-espresso-900">No products or machinery listed yet</h3>
+            <p class="text-stone-500 text-sm max-w-md mx-auto">
+                You can add equipment, parts, and service items via the
+                <a href="/admin/" class="text-crema-600 font-bold hover:underline">Django Admin Panel</a>!
+            </p>
+        </div>
         </section>
 
         <!-- Active Service & Repair Requests Section -->
-        <section class="space-y-6">
-            <div class="border-b border-stone-200 pb-4 flex justify-between items-end">
-                <div>
-                    <h2 class="font-heading font-bold text-2xl text-espresso-900">Active Service & Repair Requests</h2>
-                    <p class="text-stone-500 text-xs sm:text-sm">Manage and track your submitted repair tickets.</p>
-                </div>
-                <a href="{% url 'request_create' %}" class="text-xs sm:text-sm font-bold text-crema-600 hover:text-crema-700 transition-colors flex items-center gap-1">
-                    <i class="fa-solid fa-plus text-xs"></i> Submit Request
-                </a>
+        <div class="space-y-4 mt-6">
+    {% for req in requests %}
+        <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm flex items-center justify-between">
+            <div>
+                <h3 class="font-extrabold text-espresso-900 text-lg">{{ req.machine_model }}</h3>
+                <p class="text-xs text-stone-500 font-semibold mt-1">Submitted by: {{ req.customer_name }}</p>
+                <p class="text-sm text-stone-700 mt-2">{{ req.issue_description }}</p>
             </div>
+            <div>
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800">
+                    {{ req.status }}
+                </span>
+            </div>
+        </div>
+    {% empty %}
+        <div class="bg-white p-8 rounded-2xl border border-stone-200 text-center text-stone-500">
+            No service or repair requests submitted yet.
+        </div>
+    {% endfor %}
+</div>
 
             <!-- Request Table / List -->
-            <div class="bg-white rounded-3xl border border-stone-200/80 shadow-sm overflow-hidden p-8 text-center space-y-3">
-                <div class="w-12 h-12 bg-stone-100 text-stone-400 rounded-full flex items-center justify-center text-xl mx-auto">
+            <div
+                class="bg-white rounded-3xl border border-stone-200/80 shadow-sm overflow-hidden p-8 text-center space-y-3">
+                <div
+                    class="w-12 h-12 bg-stone-100 text-stone-400 rounded-full flex items-center justify-center text-xl mx-auto">
                     <i class="fa-solid fa-wrench"></i>
                 </div>
                 <h3 class="font-heading font-bold text-lg text-espresso-900">No repair requests submitted yet</h3>

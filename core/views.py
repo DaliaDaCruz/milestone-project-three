@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product  
+from django.contrib import messages
+from .models import Product, ServiceRequest  
 
 # Static catalog fallback matching your index.html static product IDs
 PRODUCTS_DATA = {
@@ -23,9 +24,17 @@ def index_view(request):
 
 def request_list(request):
     """Workshop requests / product catalog view."""
+    # Fetch all submitted service requests from the database
+    requests_list = ServiceRequest.objects.all().order_by('-created_at')
+    
+    # Also fetch products if you display products on this page
     products = Product.objects.all()
-    return render(request, 'core/request_list.html', {'products': products})
 
+    context = {
+        'requests': requests_list,
+        'products': products,
+    }
+    return render(request, 'core/request_list.html', context)
 
 def checkout_view(request):
     """Unified basket and checkout summary view with DB lookup and dictionary fallback."""
@@ -79,10 +88,52 @@ def checkout_view(request):
     return render(request, 'core/checkout.html', context)
 
 
-# --- Request CRUD Placeholders ---
+# --- Request CRUD Views ---
 
 def request_create(request):
     """Create a new service/equipment request."""
+    if request.method == "POST":
+        customer_name = request.POST.get('name')
+        machine_model = request.POST.get('machine_model')
+        issue_description = request.POST.get('description')
+
+        req_obj = ServiceRequest()
+
+        # Handle customer name attribute
+        if hasattr(req_obj, 'customer_name'):
+            req_obj.customer_name = customer_name
+        elif hasattr(req_obj, 'name'):
+            req_obj.name = customer_name
+
+        req_obj.machine_model = machine_model
+
+        # Handle description attribute
+        if hasattr(req_obj, 'issue_description'):
+            req_obj.issue_description = issue_description
+        elif hasattr(req_obj, 'description'):
+            req_obj.description = issue_description
+
+        # Set default status if status exists on model
+        if hasattr(req_obj, 'status') and not req_obj.status:
+            req_obj.status = 'Pending'
+
+        try:
+            req_obj.save()
+            print(f"SUCCESS: Saved Service Request #{req_obj.pk} to database!")
+        except Exception as e:
+            print("=" * 40)
+            print(f"DATABASE SAVE ERROR: {e}")
+            print("=" * 40)
+
+        # Console feedback to verify submissions live
+        print("=" * 40)
+        print(f"NEW SERVICE REQUEST: {customer_name} | Machine: {machine_model}")
+        print(f"Details: {issue_description}")
+        print("=" * 40)
+
+        messages.success(request, f"Thank you {customer_name}! Your service request for {machine_model} has been received.")
+        return redirect('index')
+
     return render(request, 'core/request_form.html')
 
 
