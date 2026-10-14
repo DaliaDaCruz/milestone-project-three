@@ -1,1 +1,1 @@
-web: gunicorn coffee_cpr.wsgi --log-file -
+web: gunicorn myproject.wsgi --log-file -
